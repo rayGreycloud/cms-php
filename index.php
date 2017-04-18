@@ -30,7 +30,6 @@
 
 ?>
 
-
         <!-- Blog Post Template -->
         <h2>
           <a href="#"><?php echo $post_title ?></a>
