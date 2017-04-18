@@ -12,8 +12,8 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
         <h1 class="page-header">
-          Page Heading
-          <small>Secondary Text</small>
+          Posts
+          <small>Category: All</small>
         </h1>
 
 <?php
