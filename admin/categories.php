@@ -24,6 +24,17 @@
                 <i class="fa fa-file"></i> Blank Page
               </li>
             </ol>
+            <div class="col-xs-6">
+              <form action="">
+                <div class="form-group">
+                  <label for="cat-title">ADD A NEW CATEGORY</label>
+                  <input class="form-control" type="text" name="cat_title">
+                </div>
+                <div class="form-group">
+                  <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
+                </div>
+              </form>
+            </div>
           </div>
         </div>
         <!-- /.row -->
