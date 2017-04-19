@@ -26,6 +26,7 @@
             </ol>
             <div class="col-xs-6">
 <?php
+// Add category query
 if (isset($_POST['submit'])) {
   $cat_title = $_POST['cat_title'];
 
@@ -57,7 +58,7 @@ if (isset($_POST['submit'])) {
             <div class="col-xs-6">
 
 <?php
-
+  // Select all categories query
   $query = "SELECT * FROM categories";
   $select_categories = mysqli_query($connection, $query);
 
@@ -78,7 +79,17 @@ while($row = mysqli_fetch_assoc($select_categories)) {
   $cat_id = $row['cat_id'];
   $cat_title = $row['cat_title'];
 
-  echo "<tr><td>{$cat_id}</td><td>{$cat_title}</td></tr>";
+  echo "<tr><td>{$cat_id}</td><td>{$cat_title}</td><td><a href='categories.php?delete={$cat_id}'>Delete</a></td></tr>";
+}
+// Delete query
+if(isset($_GET['delete'])) {
+  $cat_id_to_delete = $_GET['delete'];
+
+  $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
+  $delete_category_query = mysqli_query($connection, $query);
+  // Refresh page
+  header("Location: categories.php");
+
 }
 
 ?>
