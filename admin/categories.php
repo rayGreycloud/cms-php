@@ -36,6 +36,14 @@
               </form>
             </div> <!-- /add category form-->
             <div class="col-xs-6">
+
+<?php
+
+  $query = "SELECT * FROM categories";
+  $select_categories = mysqli_query($connection, $query);
+
+?>
+
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
@@ -44,22 +52,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Javascript</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>ReactJS</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Redux</td>
-                  </tr>
+
+<?php
+
+while($row = mysqli_fetch_assoc($select_categories)) {
+  $cat_id = $row['cat_id'];
+  $cat_title = $row['cat_title'];
+
+  echo "<tr><td>{$cat_id}</td><td>{$cat_title}</td></tr>";
+}
+
+?>
+
                 </tbody>
               </table>
             </div> <!-- /categories-->
-
 
           </div> <!-- /.col -->
         </div> <!-- /.row -->
