@@ -88,27 +88,26 @@ if(isset($_GET['edit'])) {
 
 <?php
 
-while($row = mysqli_fetch_assoc($select_categories)) {
-  $cat_id = $row['cat_id'];
-  $cat_title = $row['cat_title'];
+  while($row = mysqli_fetch_assoc($select_categories)) {
+    $cat_id = $row['cat_id'];
+    $cat_title = $row['cat_title'];
 
-  echo "<tr>";
-  echo "<td>{$cat_id}</td>";
-  echo "<td>{$cat_title}</td>";
-  echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
-  echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
-  echo "</tr>";
-}
+    echo "<tr>";
+    echo "<td>{$cat_id}</td>";
+    echo "<td>{$cat_title}</td>";
+    echo "<td><a href='categories.php?delete={$cat_id}'>Delete</a></td>";
+    echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
+    echo "</tr>";
+  }
 // Delete query
-if(isset($_GET['delete'])) {
-  $cat_id_to_delete = $_GET['delete'];
+  if (isset($_GET['delete'])) {
+    $cat_id_to_delete = $_GET['delete'];
 
-  $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
-  $delete_category_query = mysqli_query($connection, $query);
-  // Refresh page
-  header("Location: categories.php");
-
-}
+    $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
+    $delete_category_query = mysqli_query($connection, $query);
+    // Refresh page
+    header("Location: categories.php");
+  }
 
 ?>
 
