@@ -44,10 +44,10 @@
         </ul>
       </li>
       <li>
-        <a href="#"><i class="fa fa-fw fa-folder-open-o"></i> Categories</a>
+        <a href="#"><i class="fa fa-fw fa-folder-open"></i> Categories</a>
       </li>
       <li>
-        <a href="#"><i class="fa fa-fw fa-comments-o"></i> Comments</a>
+        <a href="#"><i class="fa fa-fw fa-comments"></i> Comments</a>
       </li>
       <li>
         <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-users"></i> Users<i class="fa fa-fw fa-caret-down"></i></a>
