@@ -25,25 +25,8 @@
               </li>
             </ol>
             <div class="col-xs-6">
-<?php
-// Add category query
-if (isset($_POST['submit'])) {
-  $cat_title = $_POST['cat_title'];
 
-  if ($cat_title == "" || empty($cat_title)) {
-    echo "This field is required!";
-  } else {
-    $query = "INSERT INTO categories(cat_title) ";
-    $query .="VALUE('{$cat_title}') ";
-
-    $create_category_query = mysqli_query($connection, $query);
-
-    if (!$create_category_query) {
-      die('QUERY FAILED ' . mysqli_error($connection));
-    }
-  }
-}
-?>
+<?php insert_categories(); ?>
 
               <form action="" method="post">
                 <div class="form-group">
@@ -71,12 +54,11 @@ if(isset($_GET['edit'])) {
             <div class="col-xs-6">
 
 <?php
-  // Select all categories query
+
   $query = "SELECT * FROM categories";
   $select_categories = mysqli_query($connection, $query);
 
 ?>
-
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
