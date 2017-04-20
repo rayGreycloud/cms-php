@@ -34,8 +34,8 @@
   }
 
   switch($source) {
-    case '200':
-    echo "200";
+    case 'add_post':
+    include "includes/add_post.php";
     break;
 
     default:
