@@ -58,18 +58,7 @@
                 <tbody>
 
 <?php findAllCategories() ?>
-<?php
-// Delete query
-  if (isset($_GET['delete'])) {
-    $cat_id_to_delete = $_GET['delete'];
-
-    $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
-    $delete_category_query = mysqli_query($connection, $query);
-    // Refresh page
-    header("Location: categories.php");
-  }
-
-?>
+<?php deleteCategory() ?>
 
                 </tbody>
               </table>
