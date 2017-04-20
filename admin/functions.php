@@ -43,7 +43,7 @@ function findAllCategories() {
 
 function deleteCategory() {
   global $connection;
-  
+
   if (isset($_GET['delete'])) {
     $cat_id_to_delete = $_GET['delete'];
 
@@ -51,6 +51,15 @@ function deleteCategory() {
     $delete_category_query = mysqli_query($connection, $query);
     // Refresh page
     header("Location: categories.php");
+  }
+}
+
+function selectCategoryToEdit() {
+  global $connection;
+
+  if (isset($_GET['edit'])) {
+    $cat_id = $_GET['edit'];
+    include "includes/update_categories.php";
   }
 }
 
