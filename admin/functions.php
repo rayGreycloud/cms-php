@@ -7,7 +7,7 @@ function confirmQuery($result) {
     return die('QUERY FAILED ' . mysqli_error($connection));
   }
 
-  return echo "Success!";
+  return $result;
 }
 
 function insert_categories() {
