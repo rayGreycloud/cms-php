@@ -12,7 +12,6 @@
       $post_title = $row['post_title'];
       $post_category_id = $row['post_category_id'];
       $post_status = $row['post_status'];
-
       $post_image = $row['post_image'];
       $post_tags = $row['post_tags'];
       $post_comment_count = $row['post_comment_count'];
@@ -20,7 +19,37 @@
       $post_content = $row['post_content'];
 
     }
+
+    if (isset($_POST['update_post'])) {
+
+      $post_author = $_POST['post_author'];
+      $post_title = $_POST['post_title'];
+      $post_category_id = $_POST['post_category_id'];
+      $post_status = $_POST['post_status'];
+      $post_image = $_FILES['post_image']['name'];
+      $post_image_temp = $_FILES['post_image']['tmp_name'];
+      $post_tags = $_POST['post_tags'];
+      $post_content = $_POST['post_content'];
+
+      move_uploaded_file($post_image_temp, "../images/$post_image");
+
+      $query = "UPDATE posts SET ";
+      $query .= "post_title = '{$post_title}', ";
+      $query .= "post_category_id = '{$post_category_id}', ";
+      $query .= "post_author = '{$post_author}', ";
+      $query .= "post_date = now(), ";
+      $query .= "post_image = '{$post_image}', ";
+      $query .= "post_content = '{$post_content}', ";
+      $query .= "post_tags = '{$post_tags}', ";
+      $query .= "post_status = '{$post_status}', ";
+      $query .= "WHERE post_id = $post_id_to_edit ";
+
+      $update_post_query = mysqli_query($connection, $query);
+
+      confirmQuery($update_post_query);
+    }
   }
+
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -37,7 +66,7 @@
 
   <div class="form-group">
     <label for="post_category_id">Category</label>
-    <select name="" id="">
+    <select name="post_category_id" id="">
 
 <?php
 
@@ -85,7 +114,7 @@
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="create_post" value="Publish Update">
+    <input class="btn btn-primary" type="submit" name="update_post" value="Publish Update">
   </div>
 
 </form>
