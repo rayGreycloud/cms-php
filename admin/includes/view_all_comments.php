@@ -25,7 +25,7 @@
     $comment_post_id = $row['comment_post_id'];
     $comment_author = $row['comment_post_id'];
     $comment_email = $row['comment_email'];
-    $comment_content = $row['comment_content'];
+    $comment_content = substr($row['comment_content'],0,20);
     $comment_status = $row['comment_status'];
     $comment_date = $row['comment_date'];
 
