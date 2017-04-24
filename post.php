@@ -48,7 +48,7 @@
         <img class="img-responsive" src="./images/<?php echo $post_image ?>" alt="">
         <hr>
         <p><?php echo $post_content ?></p>
-        
+
 
         <hr>
 
@@ -74,6 +74,11 @@
     if(!$create_comment_query) {
       die('Query failed' . mysqli_error($connection));
     };
+
+    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+    $query .= "WHERE post_id = $comment_post_id ";
+    $increment_comment_count_query = mysqli_query($connection, $query);
+
   }
 
 ?>
