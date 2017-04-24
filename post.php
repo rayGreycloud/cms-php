@@ -59,19 +59,21 @@
 <?php
 
   if (isset($_POST['create_comment'])) {
-    $comment_post_id_ = $_GET['p_id'];
+    $comment_post_id = $_GET['p_id'];
     $comment_author = $_POST['comment_author'];
     $comment_email = $_POST['comment_email'];
     $comment_status = "pending";
     $comment_content = $_POST['comment_content'];
-    $comment_date = now();
 
     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_status, comment_content, comment_date) ";
 
-    $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', '{$comment_date}') ";
+    $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
 
     $create_comment_query = mysqli_query($connection, $query);
 
+    if(!$create_comment_query) {
+      die('Query failed' . mysqli_error($connection));
+    };
   }
 
 ?>
