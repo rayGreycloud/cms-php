@@ -2,14 +2,13 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>id</th>
-                  <th>username</th>
-                  <th>password</th>
-                  <th>email</th>
-                  <th>first name</th>
-                  <th>last name</th>
-                  <th>image</th>
-                  <th>role</th>
+                  <th>Id</th>
+                  <th>Username</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>                  
+                  <th>Image</th>
+                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
