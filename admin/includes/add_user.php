@@ -1,5 +1,5 @@
 <?php
-  if (isset($_POST['create_post'])) {
+  if (isset($_POST['create_user'])) {
 
     $post_author = $_POST['post_author'];
     $post_title = $_POST['post_title'];
