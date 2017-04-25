@@ -6,22 +6,19 @@
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
     $user_email = $_POST['user_email'];
-    $user_lastname = $_POST['user_lastname'];
-
     $user_image = $_FILES['user_image']['name'];
     $user_image_temp = $_FILES['user_image']['tmp_name'];
-    
     $user_role = $_POST['user_role'];
 
     move_uploaded_file($user_image_temp, "../images/$user_image");
 
-    // $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
-    //
-    // $query .= "VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}') ";
-    //
-    // $create_post_query = mysqli_query($connection, $query);
-    //
-    // confirmQuery($create_post_query);
+    $query = "INSERT INTO users (username, user_password, user_firstname, user_lastname, user_email, user_image, user_role) ";
+
+    $query .= "VALUES ('{$username}', '{$user_password}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_image}', '{$user_role}') ";
+
+    $create_user_query = mysqli_query($connection, $query);
+
+    confirmQuery($create_user_query);
   }
 ?>
 
