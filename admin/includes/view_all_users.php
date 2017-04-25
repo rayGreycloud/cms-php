@@ -9,6 +9,7 @@
                   <th>Email</th>
                   <th>Image</th>
                   <th>Role</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,6 +35,8 @@
     echo "<td>$user_email</td>";
     echo "<td>$user_image</td>";
     echo "<td>$user_role</td>";
+
+    echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
     echo "<tr>";
 
   }
@@ -41,3 +44,18 @@
 
               </tbody>
             </table>
+
+<?php
+
+  if (isset($_GET['delete'])) {
+
+    $user_id_to_delete = $_GET['delete'];
+
+    $query = "DELETE FROM users WHERE user_id = {$user_id_to_delete} ";
+    $delete_user_query = mysqli_query($connection, $query);
+
+    header("Location: users.php");
+
+  }
+
+?>
