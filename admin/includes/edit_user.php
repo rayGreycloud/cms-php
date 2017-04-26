@@ -42,12 +42,12 @@
       $query = "UPDATE users SET ";
       $query .= "username = '{$username}', ";
       $query .= "user_password = '{$user_password }', ";
-      $query .= "user_firstname = '{$user_password }', ";
-      $query .= "user_lastname = '{$user_password }', ";
-      $query .= "user_email = '{$user_password }', ";
+      $query .= "user_firstname = '{$user_firstname }', ";
+      $query .= "user_lastname = '{$user_lastname }', ";
+      $query .= "user_email = '{$user_email }', ";
       $query .= "user_image = '{$user_image}', ";
-      $query .= "user_role = '{$user_role}', ";
-      $query .= "WHERE user_id = $user_id_to_edit ";
+      $query .= "user_role = '{$user_role}' ";
+      $query .= "WHERE user_id = {$user_id_to_edit} ";
 
       $edit_user_query = mysqli_query($connection, $query);
 
@@ -59,50 +59,50 @@
 
 ?>
 
-
 <form action="" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" name="username">
+    <input type="text" class="form-control" name="username" value="<?php echo $username ?>">
   </div>
 
   <div class="form-group">
     <label for="user_password">Password</label>
-    <input type="password" class="form-control" name="user_password">
+    <input type="password" class="form-control" name="user_password" value="<?php echo $user_password ?>">
   </div>
 
   <div class="form-group">
     <label for="user_firstname">Firstname</label>
-    <input type="text" class="form-control" name="user_firstname">
+    <input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname ?>">
   </div>
 
   <div class="form-group">
     <label for="user_lastname">Lastname</label>
-    <input type="text" class="form-control" name="user_lastname">
+    <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname ?>">
   </div>
 
   <div class="form-group">
     <label for="user_email">Email</label>
-    <input type="text" class="form-control" name="user_email">
+    <input type="text" class="form-control" name="user_email" value="<?php echo $user_email ?>">
   </div>
 
   <div class="form-group">
     <label for="user_image">Image</label>
+    <img width='100rem' src="../images/<?php echo $user_image; ?>" alt="">
     <input type="file" name="user_image">
   </div>
 
   <div class="form-group">
     <label for="user_role">Role</label>
     <select class="form-control" name="user_role" id="">
-      <option value="subscriber">Select Role</option>
-      <option value="admin">Admin</option>
-      <option value="subscriber">Subscriber</option>
+      <option value="<?php echo $user_role ?>"><?php echo $user_role ?></option>
+      <option value="admin">admin</option>
+      <option value="subscriber">subscriber</option>
     </select>
   </div>
 
   <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="edit_user" value="Save User">
+    <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">
   </div>
 
 </form>
