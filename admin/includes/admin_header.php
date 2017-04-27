@@ -12,8 +12,6 @@
       header("Location: ../index.php ");
     }
 
-    
-
   }
 
 ?>
