@@ -14,7 +14,7 @@
           <div class="col-lg-12">
             <h1 class="page-header">
               <?php echo $_SESSION['username'] ?>
-              <small>Welcome, Friend</small>
+              <small>Admin</small>
             </h1>
             <ol class="breadcrumb">
               <li>
