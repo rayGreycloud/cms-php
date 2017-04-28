@@ -44,7 +44,7 @@
         </ul>
       </li>
       <li>
-        <a href="./categories.php"><i class="fa fa-fw fa-folder-open"></i> Categories</a>
+        <a href="./categories.php"><i class="fa fa-fw fa-list"></i> Categories</a>
       </li>
       <li>
         <a href="./comments.php"><i class="fa fa-fw fa-comments"></i> Comments</a>
