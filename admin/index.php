@@ -86,10 +86,19 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-3">
-                    <i class="fa fa-user fa-5x"></i>
+                    <i class="fa fa-users fa-5x"></i>
                   </div>
                   <div class="col-xs-9 text-right">
-                    <div class='huge'>23</div>
+
+<?php
+
+  $query = "SELECT * FROM users";
+  $select_all_users = mysqli_query($connection, $query);
+  $user_count = mysqli_num_rows($select_all_users);
+
+  echo "<div class='huge'>{$user_count}</div>"
+?>
+
                     <div> Users</div>
                   </div>
                 </div>
@@ -111,7 +120,15 @@
                     <i class="fa fa-list fa-5x"></i>
                   </div>
                   <div class="col-xs-9 text-right">
-                    <div class='huge'>13</div>
+
+<?php
+
+  $query = "SELECT * FROM categories";
+  $select_all_categories = mysqli_query($connection, $query);
+  $category_count = mysqli_num_rows($select_all_categories);
+
+  echo "<div class='huge'>{$category_count}</div>"
+?>
                     <div>Categories</div>
                   </div>
                 </div>
