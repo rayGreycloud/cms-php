@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <a href="posts.php">
+              <a href="./posts.php">
                 <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -72,7 +72,7 @@
                   </div>
                 </div>
               </div>
-              <a href="comments.php">
+              <a href="./comments.php">
                 <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -103,7 +103,7 @@
                   </div>
                 </div>
               </div>
-              <a href="users.php">
+              <a href="./users.php">
                 <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -133,7 +133,7 @@
                   </div>
                 </div>
               </div>
-              <a href="categories.php">
+              <a href="./categories.php">
                 <div class="panel-footer">
                   <span class="pull-left">View Details</span>
                   <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -142,6 +142,37 @@
               </a>
             </div>
           </div>
+        </div>
+
+        <div class="row">
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['bar']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales', 'Expenses', 'Profit'],
+                ['2014', 1000, 400, 200],
+                ['2015', 1170, 460, 250],
+                ['2016', 660, 1120, 300],
+                ['2017', 1030, 540, 350]
+              ]);
+
+              var options = {
+                chart: {
+                  title: 'Company Performance',
+                  subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+              };
+
+              var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+              chart.draw(data, google.charts.Bar.convertOptions(options));
+            }
+          </script>
+
+          <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+
         </div>
 
       </div>  <!-- /.container-fluid -->
