@@ -16,14 +16,7 @@
               Posts
               <small>Admin</small>
             </h1>
-            <ol class="breadcrumb">
-              <li>
-                <i class="fa fa-dashboard"></i>  <a href="./index.php">Dashboard</a>
-              </li>
-              <li class="active">
-                <i class="fa fa-file"></i> <a href="./includes/add_post.php">Blank Post</a>
-              </li>
-            </ol>
+
 
 <?php
 
