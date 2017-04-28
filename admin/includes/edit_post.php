@@ -56,6 +56,8 @@
       $update_post_query = mysqli_query($connection, $query);
 
       confirmQuery($update_post_query);
+
+      header("Location: posts.php");
     }
   }
 
@@ -103,7 +105,15 @@
 
   <div class="form-group">
     <label for="post_status">Status</label>
-    <input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
+    <select name="post_status" id="">
+<?php
+
+  echo "<option value='{$post_status}'>{$post_status}</option>";
+
+ ?>
+      <option value='draft'>draft</option>
+      <option value='published'>published</option>
+    </select>
   </div>
 
   <div class="form-group">

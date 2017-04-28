@@ -49,7 +49,6 @@
         <hr>
         <p><?php echo $post_content ?></p>
 
-
         <hr>
 
 <?php } ?>
