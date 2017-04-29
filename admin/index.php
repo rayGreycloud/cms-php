@@ -154,9 +154,17 @@
   $select_all_published_posts = mysqli_query($connection, $query);
   $published_post_count = mysqli_num_rows($select_all_published_posts);
 
+  $query = "SELECT * FROM comments WHERE comment_status = 'approved'";
+  $select_all_approved_comments = mysqli_query($connection, $query);
+  $approved_comment_count = mysqli_num_rows($select_all_approved_comments);
+
   $query = "SELECT * FROM comments WHERE comment_status = 'pending'";
   $select_all_pending_comments = mysqli_query($connection, $query);
   $pending_comment_count = mysqli_num_rows($select_all_pending_comments);
+
+  $query = "SELECT * FROM users WHERE user_role = 'admin'";
+  $select_all_admins = mysqli_query($connection, $query);
+  $admin_count = mysqli_num_rows($select_all_admins);
 
   $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
   $select_all_subscribers = mysqli_query($connection, $query);
@@ -177,9 +185,9 @@
       ['Activity', 'Number'],
 
   <?php
-  $element_text = array('All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories');
+  $element_text = array('All Posts', 'Active Posts', 'Draft Posts', 'All Comments', 'Approved', 'Pending Comments', 'All Users', 'Admins', 'Subscribers', 'Categories');
 
-  $element_count = array($post_count, $published_post_count, $draft_post_count, $comment_count, $pending_comment_count, $user_count, $subscriber_count, $category_count);
+  $element_count = array($post_count, $published_post_count, $draft_post_count, $comment_count, $approved_comment_count, $pending_comment_count, $user_count, $admin_count, $subscriber_count, $category_count);
 
   for ($i = 0; $i < sizeof($element_text); $i++) {
     echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
