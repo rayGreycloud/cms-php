@@ -149,9 +149,15 @@
   $query = "SELECT * FROM posts WHERE post_status = 'draft'";
   $select_all_draft_posts = mysqli_query($connection, $query);
   $draft_post_count = mysqli_num_rows($select_all_draft_posts);
+
+  $query = "SELECT * FROM posts WHERE post_status = 'published'";
+  $select_all_published_posts = mysqli_query($connection, $query);
+  $published_post_count = mysqli_num_rows($select_all_published_posts);
+
   $query = "SELECT * FROM comments WHERE comment_status = 'pending'";
   $select_all_pending_comments = mysqli_query($connection, $query);
   $pending_comment_count = mysqli_num_rows($select_all_pending_comments);
+
   $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
   $select_all_subscribers = mysqli_query($connection, $query);
   $subscriber_count = mysqli_num_rows($select_all_subscribers);
@@ -168,12 +174,12 @@
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Data', 'Count'],
+      ['Activity', 'Number'],
 
   <?php
-  $element_text = array('Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories');
+  $element_text = array('All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories');
 
-  $element_count = array($post_count, $draft_post_count, $comment_count, $pending_comment_count, $user_count, $subscriber_count, $category_count);
+  $element_count = array($post_count, $published_post_count, $draft_post_count, $comment_count, $pending_comment_count, $user_count, $subscriber_count, $category_count);
 
   for ($i = 0; $i < sizeof($element_text); $i++) {
     echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
