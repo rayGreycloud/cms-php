@@ -57,7 +57,7 @@
 
       confirmQuery($update_post_query);
 
-      echo "<p>Post Updated. <a href='./../post.php?p_id={$post_id_to_edit}'>View Post</a></p>";
+      echo "<p class='bg-success'>Post Updated. <a href='./../post.php?p_id={$post_id_to_edit}'>View Post</a></p>";
 
 //      header("Location: posts.php");
     }
