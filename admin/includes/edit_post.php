@@ -88,7 +88,7 @@
 
   while($row = mysqli_fetch_assoc($current_cat_query)) {
     $current_cat_title = $row['cat_title'];
-    echo "<option value=''>{$current_cat_title}</option>";
+    echo "<option value='$post_category_id'>{$current_cat_title}</option>";
   }
 
   $query = "SELECT * FROM categories";
@@ -98,7 +98,7 @@
     $cat_id = $row['cat_id'];
     $cat_title = $row['cat_title'];
 
-    echo "<option value=''>{$cat_title}</option>";
+    echo "<option value='$cat_id'>{$cat_title}</option>";
   }
  ?>
 
