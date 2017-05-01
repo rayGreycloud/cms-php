@@ -28,7 +28,6 @@
 
  ?>
 
-
           <form action="" method="post" class="form-group">
             <table class="table table-bordered table-hover">
 
