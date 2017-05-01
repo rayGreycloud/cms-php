@@ -86,7 +86,7 @@
   $current_cat_query = mysqli_query($connection, $query1);
 
   while($row = mysqli_fetch_assoc($current_cat_query)) {
-    $current_cat_title = $row['cat_title'];
+    $current_cat_title = ucfirst($row['cat_title']);
     echo "<option value='$post_category_id'>{$current_cat_title}</option>";
   }
 
@@ -97,8 +97,11 @@
     $cat_id = $row['cat_id'];
     $cat_title = $row['cat_title'];
 
-    echo "<option value='$cat_id'>{$cat_title}</option>";
+    if ($cat_id !== $post_category_id) {
+      echo "<option value='$cat_id'>{$cat_title}</option>";
+    }
   }
+  
  ?>
 
     </select>
