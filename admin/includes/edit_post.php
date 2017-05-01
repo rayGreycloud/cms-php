@@ -108,12 +108,17 @@
     <label for="post_status">Status</label>
     <select name="post_status" id="">
 <?php
+  $current_post_status = ucfirst($post_status);
 
-  echo "<option value='{$post_status}'>{$post_status}</option>";
+  echo "<option value='{$post_status}'>{$current_post_status}</option>";
 
+  if ($post_status == 'published') {
+    echo "<option value='draft'>Draft</option>";
+  } else {
+    echo "<option value='published'>Published</option>";
+  }
  ?>
-      <option value='draft'>draft</option>
-      <option value='published'>published</option>
+
     </select>
   </div>
 
