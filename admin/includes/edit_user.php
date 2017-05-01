@@ -72,6 +72,15 @@
   </div>
 
   <div class="form-group">
+    <label for="user_role">Role</label>
+    <select class="form-control" name="user_role" id="">
+      <option value="<?php echo $user_role ?>"><?php echo ucfirst($user_role) ?></option>
+      <option value="admin">Admin</option>
+      <option value="subscriber">Subscriber</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="user_firstname">Firstname</label>
     <input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname ?>">
   </div>
@@ -90,15 +99,6 @@
     <label for="user_image">Image</label>
     <img width='100rem' src="../images/<?php echo $user_image; ?>" alt="">
     <input type="file" name="user_image">
-  </div>
-
-  <div class="form-group">
-    <label for="user_role">Role</label>
-    <select class="form-control" name="user_role" id="">
-      <option value="<?php echo $user_role ?>"><?php echo $user_role ?></option>
-      <option value="admin">admin</option>
-      <option value="subscriber">subscriber</option>
-    </select>
   </div>
 
   <div class="form-group">

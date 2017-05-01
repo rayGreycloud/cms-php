@@ -37,6 +37,15 @@
   </div>
 
   <div class="form-group">
+    <label for="user_role">Role</label>
+    <select class="form-control" name="user_role" id="">
+      <option value="subscriber">Select Role</option>
+      <option value="admin">Admin</option>
+      <option value="subscriber">Subscriber</option>
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="user_firstname">Firstname</label>
     <input type="text" class="form-control" name="user_firstname">
   </div>
@@ -54,15 +63,6 @@
   <div class="form-group">
     <label for="user_image">Image</label>
     <input type="file" name="user_image">
-  </div>
-
-  <div class="form-group">
-    <label for="user_role">Role</label>
-    <select class="form-control" name="user_role" id="">
-      <option value="subscriber">Select Role</option>
-      <option value="admin">Admin</option>
-      <option value="subscriber">Subscriber</option>
-    </select>
   </div>
 
   <div class="form-group">
