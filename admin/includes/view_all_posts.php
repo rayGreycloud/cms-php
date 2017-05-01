@@ -32,7 +32,7 @@
           <form action="" method="post" class="form-group">
             <table class="table table-bordered table-hover">
 
-              <div id="bulkOptionContainer" class="col-xs-4">
+              <div class="col-xs-4 bulkOption__group--pad-bot" id="bulkOptionContainer">
                 <select class="form-control" name="bulk_options" id="">
                   <option value="">Select Options</option>
                   <option value="published">Publish</option>
@@ -40,7 +40,7 @@
                   <option value="delete">Delete</option>
                 </select>
               </div>
-              <div class="col-xs-4">
+              <div class="col-xs-4 bulkOption__group--pad-bot">
                 <input type="submit" name="submit" class="btn btn-success" value="Apply">
                 <a class="btn btn-primary" href="add_post.php">Add New</a>
               </div>
