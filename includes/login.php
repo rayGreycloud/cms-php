@@ -25,11 +25,10 @@
       $db_user_firstname = $row['user_firstname'];
       $db_user_lastname = $row['user_lastname'];
       $db_user_role = $row['user_role'];
-
     }
 
-    if ($username === $db_username && $password === $db_user_password) {
-
+    if ($password === $db_user_password) {
+      
       $_SESSION['username'] = $db_username;
       $_SESSION['firstname'] = $db_user_firstname;
       $_SESSION['lastname'] = $db_user_lastname;
