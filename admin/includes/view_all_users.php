@@ -34,7 +34,7 @@
     echo "<td>$user_firstname</td>";
     echo "<td>$user_lastname</td>";
     echo "<td>$user_email</td>";
-    echo "<td><img src='../images/$user_image'></td>";
+    echo "<td><img width='50rem' src='../images/$user_image'></td>";
     echo "<td>" . ucfirst($user_role) . "</td>";
     echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
     echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
