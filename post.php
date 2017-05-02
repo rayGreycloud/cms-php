@@ -58,26 +58,31 @@
 <?php
 
   if (isset($_POST['create_comment'])) {
+
     $comment_post_id = $_GET['p_id'];
     $comment_author = $_POST['comment_author'];
     $comment_email = $_POST['comment_email'];
     $comment_status = "pending";
     $comment_content = $_POST['comment_content'];
 
-    $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_status, comment_content, comment_date) ";
+    if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-    $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
+      $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_status, comment_content, comment_date) ";
 
-    $create_comment_query = mysqli_query($connection, $query);
+      $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
 
-    if(!$create_comment_query) {
-      die('Query failed' . mysqli_error($connection));
-    };
+      $create_comment_query = mysqli_query($connection, $query);
 
-    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-    $query .= "WHERE post_id = $comment_post_id ";
-    $increment_comment_count_query = mysqli_query($connection, $query);
+      if(!$create_comment_query) {
+        die('Query failed' . mysqli_error($connection));
+      };
 
+      $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+      $query .= "WHERE post_id = $comment_post_id ";
+      $increment_comment_count_query = mysqli_query($connection, $query);
+    } else {
+      echo "<script>alert('All fields are required')</script>";
+    }
   }
 
 ?>
