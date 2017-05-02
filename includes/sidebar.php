@@ -29,8 +29,10 @@
             <button name="login" class="btn btn-primary" type="submit">Login</button>
           </span>
         </div>
-
       </form>
+      <div class="col-lg-12 text-center">
+        <a href="./registration.php">Register Here</a>
+      </div>
   </div>
 
   <!-- Blog Categories Well -->

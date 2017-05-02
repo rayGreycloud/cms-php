@@ -4,8 +4,41 @@
 
   if (isset($_POST['submit'])) {
 
-    echo "Bingo!";
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
 
+    if (!empty($username) && !empty($email) && !empty($password)) {
+
+      $username = mysqli_real_escape_string($connection, $username);
+      $password = mysqli_real_escape_string($connection, $password);
+      $email = mysqli_real_escape_string($connection, $email);
+
+      $query = "SELECT randSalt FROM users";
+      $select_randsalt_query = mysqli_query($connection, $query);
+
+      if (!$select_randsalt_query) {
+        die("Query failed" . mysqli_error($connection));
+      }
+
+      $row = mysqli_fetch_array($select_randsalt_query);
+      $salt = $row['randSalt'];
+
+      $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
+      $query .= "VALUES ('{$username}', '{$user_password}', '{$user_email}', 'subscriber') ";
+
+      $register_user_query = mysqli_query($connection, $query);
+
+      if (!$register_user_query) {
+        die("Query failed" . mysqli_error($connection) . ' ' . mysqli_errno($connection));
+      }
+
+      $message = "Registration successful";
+    } else {
+      $message = "All fields are required";
+    }
+  } else {
+    $message = "";
   }
 
 ?>
@@ -23,6 +56,7 @@
           <div class="form-wrap">
           <h1>Register</h1>
             <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+              <h6 class="text-center"><?php echo $message; ?></h6>
               <div class="form-group">
                 <label for="username" class="sr-only">username</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="Username">
