@@ -25,7 +25,7 @@
       $salt = $row['randSalt'];
 
       $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
-      $query .= "VALUES ('{$username}', '{$user_password}', '{$user_email}', 'subscriber') ";
+      $query .= "VALUES ('{$username}', '{$password}', '{$email}', 'subscriber') ";
 
       $register_user_query = mysqli_query($connection, $query);
 
