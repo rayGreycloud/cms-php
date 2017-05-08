@@ -19,13 +19,14 @@
 <?php
 
   if (isset($_GET['p_id'])) {
-    $post_to_show_id = $_GET['p_id'];
+    $selected_post_id = $_GET['p_id'];
+    $selected_author = $_GET['author'];
   }
 
-  $query = "SELECT * FROM posts WHERE post_id = $post_to_show_id ";
-  $select_post_query = mysqli_query($connection, $query);
+  $query = "SELECT * FROM posts WHERE post_author = '{$selected_author}' ";
+  $select_author_query = mysqli_query($connection, $query);
 
-  while ($row = mysqli_fetch_assoc($select_post_query)) {
+  while ($row = mysqli_fetch_assoc($select_author_query)) {
 
     $post_id = $row['post_id'];
     $post_title = $row['post_title'];
@@ -52,66 +53,6 @@
         <hr>
 
 <?php } ?>
-
-<!-- Blog Comments -->
-
-<?php
-
-  if (isset($_POST['create_comment'])) {
-
-    $comment_post_id = $_GET['p_id'];
-    $comment_author = $_POST['comment_author'];
-    $comment_email = $_POST['comment_email'];
-    $comment_status = "pending";
-    $comment_content = $_POST['comment_content'];
-
-    if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
-
-      $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_status, comment_content, comment_date) ";
-
-      $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
-
-      $create_comment_query = mysqli_query($connection, $query);
-
-      if(!$create_comment_query) {
-        die('Query failed' . mysqli_error($connection));
-      };
-
-      $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-      $query .= "WHERE post_id = $comment_post_id ";
-      $increment_comment_count_query = mysqli_query($connection, $query);
-    } else {
-      echo "<script>alert('All fields are required')</script>";
-    }
-  }
-
-?>
-
-<!-- Comments Form -->
-<div class="well">
-  <h4>Leave a Comment:</h4>
-  <form action="" method="POST" role="form">
-
-    <div class="form-group">
-      <label for="author">Author</label>
-      <input class="form-control" type="text" name="comment_author"></input>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input class="form-control" type="email" name="comment_email"></input>
-    </div>
-
-    <div class="form-group">
-      <label for="comment">Comment</label>
-      <textarea class="form-control" rows="3" name="comment_content"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
-  </form>
-</div>
-
-<hr>
 
 <!-- Posted Comments -->
 <?php
