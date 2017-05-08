@@ -37,7 +37,7 @@
     echo "<td><img width='50rem' src='../images/$user_image'></td>";
     echo "<td>" . ucfirst($user_role) . "</td>";
     echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-    echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
+    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user: {$username}?') \" href='users.php?delete={$user_id}'>Delete</a></td>";
     echo "<tr>";
 
   }
