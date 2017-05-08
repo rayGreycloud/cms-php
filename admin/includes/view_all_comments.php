@@ -48,7 +48,7 @@
 
     echo "<td><a href='comments.php?approve=$comment_id'>approve</a></td>";
     echo "<td><a href='comments.php?reject={$comment_id}'>reject</a></td>";
-    echo "<td><a href='comments.php?delete={$comment_id}'>delete</a></td>";
+    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?') \" href='comments.php?delete={$comment_id}'>delete</a></td>";
     echo "</tr>";
 
   }
