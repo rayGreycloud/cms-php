@@ -1,30 +1,48 @@
 <?php
 
-  if (isset($_POST['checkBoxArray'])) {
+if (isset($_POST['checkBoxArray'])) {
 
-    foreach ($_POST['checkBoxArray'] as $checkedPost_Id) {
-      $bulk_options = $_POST['bulk_options'];
+  foreach ($_POST['checkBoxArray'] as $checkedPost_Id) {
+    $bulk_options = $_POST['bulk_options'];
 
-      switch($bulk_options) {
-        case 'draft':
-        case 'published':
-          $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$checkedPost_Id} ";
-          $update_to_post_status = mysqli_query($connection, $query);
+    switch($bulk_options) {
+      case 'draft':
+      case 'published':
+        $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$checkedPost_Id} ";
+        $update_to_post_status = mysqli_query($connection, $query);
 
-          confirmQuery($update_to_post_status);
-          break;
-        case 'delete':
-          $query = "DELETE FROM posts WHERE post_id={$checkedPost_Id} ";
-          $delete_post_query = mysqli_query($connection, $query);
+        confirmQuery($update_to_post_status);
+        break;
+      case 'delete':
+        $query = "DELETE FROM posts WHERE post_id={$checkedPost_Id} ";
+        $delete_post_query = mysqli_query($connection, $query);
 
-          confirmQuery($delete_post_query);
-          break;
+        confirmQuery($delete_post_query);
+        break;
+      case 'clone':
+        $query = "SELECT * FROM posts WHERE post_id={$checkedPost_Id} ";
+        $post_to_clone_query = mysqli_query($connection, $query);
 
-      }
+        while ($row = mysqli_fetch_array($post_to_clone_query)) {
+          $post_author = $row['post_author'];
+          $post_title = $row['post_title'];
+          $post_category_id = $row['post_category_id'];
+          $post_status = $row['post_status'];
+          $post_image = $row['post_image'];
+          $post_tags = $row['post_tags'];
+          $post_comment_count = 0;
+        }
+
+        $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
+        $query .= "VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}') ";
+        $clone_post_query = mysqli_query($connection, $query);
+
+        confirmQuery($clone_post_query);
+        break;
+
     }
-
   }
-
+}
 
  ?>
 
@@ -37,6 +55,7 @@
                   <option value="published">Publish</option>
                   <option value="draft">Draft</option>
                   <option value="delete">Delete</option>
+                  <option value="clone">Clone</option>
                 </select>
               </div>
               <div class="col-xs-4 bulkOption__group--pad-bot">
