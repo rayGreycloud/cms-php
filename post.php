@@ -29,6 +29,12 @@ function confirmQuery($result) {
 if (isset($_GET['p_id'])) {
   $post_to_show_id = $_GET['p_id'];
 
+  $query = "UPDATE posts SET post_views_count = post_views_count + 1 ";
+  $query .= "WHERE post_id = $post_to_show_id ";
+  $increment_views_count_query = mysqli_query($connection, $query);
+
+  confirmQuery($increment_views_count_query);
+
   $query = "SELECT * FROM posts WHERE post_id = $post_to_show_id ";
   $select_post_query = mysqli_query($connection, $query);
 
