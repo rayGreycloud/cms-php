@@ -22,13 +22,13 @@
 
     if (isset($_POST['update_post'])) {
 
-      $post_author = $_POST['post_author'];
-      $post_title = $_POST['post_title'];
+      $post_author = escapeString($connection, $_POST['post_author']);
+      $post_title = escapeString($connection, $_POST['post_title']);
       $post_category_id = $_POST['post_category_id'];
       $post_status = $_POST['post_status'];
       $post_image = $_FILES['post_image']['name'];
       $post_image_temp = $_FILES['post_image']['tmp_name'];
-      $post_tags = $_POST['post_tags'];
+      $post_tags = escapeString($connection, $_POST['post_tags']);
       $post_content = $_POST['post_content'];
 
       move_uploaded_file($post_image_temp, "../images/user/$post_image");
@@ -127,7 +127,7 @@
 
   <div class="form-group">
     <label for="post_image">Image</label>
-    <img width='100rem' src="../images/user<?php echo $post_image; ?>" alt="">
+    <img width='100rem' src="../images/user/<?php echo $post_image; ?>" alt="">
     <input type="file" name="post_image">
   </div>
 
