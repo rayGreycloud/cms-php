@@ -24,6 +24,7 @@
 
   $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
   $select_posts_by_category_query = mysqli_query($connection, $query);
+  confirmQuery($select_posts_by_category_query);
 
   while($row = mysqli_fetch_assoc($select_posts_by_category_query)) {
     $post_id = $row['post_id'];
