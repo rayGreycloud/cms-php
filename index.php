@@ -19,6 +19,7 @@
 <?php
   $query = "SELECT * FROM posts WHERE post_status = 'published' ";
   $select_all_posts_query = mysqli_query($connection, $query);
+  confirmQuery($select_all_posts_query);
 
   if (mysqli_num_rows($select_all_posts_query) == 0) {
     echo "<h2 class='text-center'>No posts found.</h2>";
