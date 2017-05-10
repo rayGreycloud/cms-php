@@ -120,7 +120,7 @@ if (isset($_POST['checkBoxArray'])) {
     echo "<td>$post_status</td>";
     echo "<td><img width='100rem' src='../images/$post_image'></td>";
     echo "<td>$post_tags</td>";
-    echo "<td>$post_views_count</td>";
+    echo "<td><a href='posts.php?reset={$post_id}'>$post_views_count</a></td>";
     echo "<td>$post_comment_count</td>";
     echo "<td>$post_date</td>";
     echo "<td><a href='./../post.php?p_id={$post_id}'>View</a></td>";
@@ -135,6 +135,17 @@ if (isset($_POST['checkBoxArray'])) {
             </table>
           </form>
 <?php
+
+if (isset($_GET['reset'])) {
+
+  $post_id_to_reset = $_GET['reset'];
+
+  $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$post_id_to_reset} ";
+  $reset_views_count_query = mysqli_query($connection, $query);
+
+  header("Location: posts.php");
+
+}
 
 if (isset($_GET['delete'])) {
 
