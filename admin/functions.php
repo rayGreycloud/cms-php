@@ -10,6 +10,12 @@ function confirmQuery($result) {
   return $result;
 }
 
+function escapeString($connection, $string) {
+  global $connection;
+
+  return mysqli_real_escape_string($connection, $string);
+}
+
 function insert_categories() {
 
   global $connection;
