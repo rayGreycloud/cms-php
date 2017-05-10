@@ -87,6 +87,7 @@ if (isset($_POST['checkBoxArray'])) {
 
   $query = "SELECT * FROM posts ORDER BY post_id DESC";
   $select_posts = mysqli_query($connection, $query);
+  confirmQuery($select_posts);
 
   while($row = mysqli_fetch_assoc($select_posts)) {
     $post_id = $row['post_id'];
@@ -111,6 +112,7 @@ if (isset($_POST['checkBoxArray'])) {
 
     $cat_query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
     $current_cat_query = mysqli_query($connection, $cat_query);
+    confirmQuery($current_cat_query);
 
     while($row = mysqli_fetch_assoc($current_cat_query)) {
       $post_category_title = $row['cat_title'];
@@ -142,6 +144,7 @@ if (isset($_GET['reset'])) {
 
   $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$post_id_to_reset} ";
   $reset_views_count_query = mysqli_query($connection, $query);
+  confirmQuery($reset_views_count_query);
 
   header("Location: posts.php");
 
@@ -153,7 +156,8 @@ if (isset($_GET['delete'])) {
 
   $query = "DELETE FROM posts WHERE post_id = {$post_id_to_delete} ";
   $delete_post_query = mysqli_query($connection, $query);
-
+  confirmQuery($delete_post_query);
+  
   header("Location: posts.php");
 
 }
