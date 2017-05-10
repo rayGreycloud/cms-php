@@ -25,11 +25,9 @@
       $db_user_firstname = $row['user_firstname'];
       $db_user_lastname = $row['user_lastname'];
       $db_user_role = $row['user_role'];
-      $salt = $row['randSalt'];
     }
 
-    $user_hashed_pwd = crypt($password, $salt);
-    if (hash_equals($user_hashed_pwd, $db_hashed_pwd)) {
+    if (password_verify($password, $db_hashed_pwd)) {
 
       $_SESSION['username'] = $db_username;
       $_SESSION['firstname'] = $db_user_firstname;
@@ -37,7 +35,6 @@
       $_SESSION['user_role'] = $db_user_role;
 
       header("Location: ../admin/index.php ");
-
     } else {
       header("Location: ../index.php ");
     }
