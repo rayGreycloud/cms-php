@@ -18,14 +18,6 @@
 
 <?php
 
-function confirmQuery($result) {
-  if (!$result) {
-    return die('QUERY FAILED ' . mysqli_error($connection));
-  }
-
-  return $result;
-}
-
 if (isset($_GET['p_id'])) {
   $post_to_show_id = $_GET['p_id'];
 
@@ -37,6 +29,7 @@ if (isset($_GET['p_id'])) {
 
   $query = "SELECT * FROM posts WHERE post_id = $post_to_show_id ";
   $select_post_query = mysqli_query($connection, $query);
+  confirmQuery($select_post_query);
 
   while ($row = mysqli_fetch_assoc($select_post_query)) {
 
@@ -79,17 +72,16 @@ if (isset($_GET['p_id'])) {
 if (isset($_POST['create_comment'])) {
 
   $comment_post_id = $_GET['p_id'];
-  $comment_author = $_POST['comment_author'];
-  $comment_email = $_POST['comment_email'];
+  $comment_author = escapeString($connection, $_POST['comment_author']);
+  $comment_email = escapeString($connection, $_POST['comment_email']);
   $comment_status = "pending";
-  $comment_content = $_POST['comment_content'];
+  $comment_content = escapeString($connection, $_POST['comment_content']);
 
   if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_status, comment_content, comment_date) ";
 
     $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
-
     $create_comment_query = mysqli_query($connection, $query);
 
     confirmQuery($create_comment_query);
@@ -97,6 +89,8 @@ if (isset($_POST['create_comment'])) {
     $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
     $query .= "WHERE post_id = $comment_post_id ";
     $increment_comment_count_query = mysqli_query($connection, $query);
+    confirmQuery($increment_comment_count_query);
+
   } else {
     echo "<script>alert('All fields are required')</script>";
   }
@@ -137,7 +131,6 @@ $query = "SELECT * FROM comments WHERE comment_post_id = $comment_post_id ";
 $query .= "AND comment_status = 'approved' ";
 $query .= "ORDER BY comment_id DESC ";
 $select_comment_query = mysqli_query($connection, $query);
-
 confirmQuery($select_comment_query);
 
 while ($row = mysqli_fetch_array($select_comment_query)) {
