@@ -73,6 +73,7 @@ if (isset($_POST['checkBoxArray'])) {
                   <th>Status</th>
                   <th>Image</th>
                   <th>Tags</th>
+                  <th>Views</th>
                   <th>Comments</th>
                   <th>Date</th>
                   <th>View</th>
@@ -96,6 +97,7 @@ if (isset($_POST['checkBoxArray'])) {
     $post_image = $row['post_image'];
     $post_tags = $row['post_tags'];
     $post_comment_count = $row['post_comment_count'];
+    $post_views_count = $row['post_views_count'];
     $post_date = $row['post_date'];
 
     echo "<tr>";
@@ -118,6 +120,7 @@ if (isset($_POST['checkBoxArray'])) {
     echo "<td>$post_status</td>";
     echo "<td><img width='100rem' src='../images/$post_image'></td>";
     echo "<td>$post_tags</td>";
+    echo "<td>$post_views_count</td>";
     echo "<td>$post_comment_count</td>";
     echo "<td>$post_date</td>";
     echo "<td><a href='./../post.php?p_id={$post_id}'>View</a></td>";
