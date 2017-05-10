@@ -31,7 +31,7 @@
       $post_tags = $_POST['post_tags'];
       $post_content = $_POST['post_content'];
 
-      move_uploaded_file($post_image_temp, "../images/$post_image");
+      move_uploaded_file($post_image_temp, "../images/user/$post_image");
 
       if (empty($post_image)) {
         $query = "SELECT * FROM posts WHERE post_id = {$post_id_to_edit}";
@@ -101,7 +101,7 @@
       echo "<option value='$cat_id'>{$cat_title}</option>";
     }
   }
-  
+
  ?>
 
     </select>
@@ -127,7 +127,7 @@
 
   <div class="form-group">
     <label for="post_image">Image</label>
-    <img width='100rem' src="../images/<?php echo $post_image; ?>" alt="">
+    <img width='100rem' src="../images/user<?php echo $post_image; ?>" alt="">
     <input type="file" name="post_image">
   </div>
 
