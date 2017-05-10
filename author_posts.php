@@ -25,6 +25,7 @@
 
   $query = "SELECT * FROM posts WHERE post_author = '{$selected_author}' ";
   $select_author_query = mysqli_query($connection, $query);
+  confirmQuery($select_author_query);
 
   while ($row = mysqli_fetch_assoc($select_author_query)) {
 
@@ -61,10 +62,7 @@ $query = "SELECT * FROM comments WHERE comment_post_id = $comment_post_id ";
 $query .= "AND comment_status = 'approved' ";
 $query .= "ORDER BY comment_id DESC ";
 $select_comment_query = mysqli_query($connection, $query);
-
-if (!$select_comment_query) {
-  die('Query Failed' . mysqli_error($connection));
-}
+confirmQuery($select_comment_query);
 
 while ($row = mysqli_fetch_array($select_comment_query)) {
   $comment_date = $row['comment_date'];
