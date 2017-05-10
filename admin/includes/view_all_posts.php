@@ -124,7 +124,7 @@ if (isset($_POST['checkBoxArray'])) {
     }
     echo "<td>$post_category_title</td>";
     echo "<td>$post_status</td>";
-    echo "<td><img width='100rem' src='../images/$post_image'></td>";
+    echo "<td><img width='100rem' src='../images/user/$post_image'></td>";
     echo "<td>$post_tags</td>";
     echo "<td><a href='posts.php?reset={$post_id}'>$post_views_count</a></td>";
     echo "<td>$post_comment_count</td>";
