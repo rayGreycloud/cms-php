@@ -5,7 +5,8 @@
 
     $query = "SELECT * FROM users WHERE user_id = $user_id_to_edit ";
     $get_user_to_edit_query = mysqli_query($connection, $query);
-
+    confirmQuery($get_user_to_edit_query);
+    
     while ($row = mysqli_fetch_assoc($get_user_to_edit_query)) {
       $db_username = $row['username'];
       $db_user_password = $row['user_password'];
@@ -32,9 +33,10 @@
 
       if (empty($user_image)) {
         $query = "SELECT * FROM users WHERE user_id = {$user_id_to_edit}";
-        $select_image = mysqli_query($connection, $query);
+        $select_image_query = mysqli_query($connection, $query);
+        confirmQuery($select_image_query);
 
-        while($row = mysqli_fetch_array($select_image)) {
+        while ($row = mysqli_fetch_array($select_image_query)) {
           $user_image = $row['user_image'];
         }
       }
@@ -61,6 +63,8 @@
 
       header("Location: users.php");
     }
+  } else {
+    header("Location: index.php");
   }
 
 ?>
