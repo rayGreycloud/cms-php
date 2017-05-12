@@ -1,6 +1,6 @@
 <?php include "./includes/admin_header.php" ?>
 <?php
-
+/* instructor's code - does not function properly
 $session = session_id();
 $time = time();
 $time_out_in_seconds = 60;
@@ -11,15 +11,22 @@ $get_users_query = mysqli_query($connection, $query);
 $user_count = mysqli_num_rows($get_users_query);
 
 if ($user_count == NULL) {
-  $query = "INSERT INTO users_online(session, time) ";
+  $query = "INSERT INTO users_online(session, session_time) ";
   $query .= "VALUES ('$session', '$time')";
   $user_session_query = mysqli_query($connection, $query);
   confirmQuery($user_session_query);
 
 } else {
-
+  $query = "UPDATE users_online SET session_time = '$time' WHERE session = '$session'";
+  $user_session_query = mysqli_query($connection, $query);
+  confirmQuery($user_session_query);
 }
 
+$query = "SELECT * FROM users_online WHERE session_time < '$time_out' ";
+$users_online_query = mysqli_query($connection, $query);
+confirmQuery($users_online_query);
+$users_online_count = mysqli_num_rows($users_online_query);
+*/
  ?>
 
   <div id="wrapper">
@@ -36,7 +43,7 @@ if ($user_count == NULL) {
           <div class="col-lg-12">
             <h1 class="page-header">
               Dashboard
-              <small>Admin</small>
+              <small> <?php echo $_SESSION['username']; ?></small>
             </h1>
           </div>
         </div>  <!-- /.row -->
