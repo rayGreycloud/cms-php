@@ -83,7 +83,7 @@
           <div class="col-lg-12">
             <h1 class="page-header">
               Profile
-              <small>Admin</small>
+              <small> <?php echo $_SESSION['username']; ?></small>
             </h1>
 
             <form action="" method="post" enctype="multipart/form-data">
