@@ -97,7 +97,7 @@ if (isset($_GET['delete'])) {
   $query = "DELETE FROM comments WHERE comment_id = {$comment_id_to_delete} ";
   $delete_comment_query = mysqli_query($connection, $query);
 
-  header("Location: comments.php");
+  header("Location: comments.php?source=post_comments&p_id=" . $_GET['p_id'] . "");
 
 }
 
