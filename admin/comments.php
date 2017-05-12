@@ -17,7 +17,6 @@
               <small>Admin</small>
             </h1>
 
-
 <?php
 
   if (isset($_GET['source'])) {
@@ -27,17 +26,13 @@
   }
 
   switch($source) {
-    case 'add_post':
-    include "includes/add_post.php";
-    break;
 
-    case 'edit_post':
-    include "includes/edit_post.php";
+    case 'post_comments':
+    include "includes/view_all_post_comments.php";
     break;
 
     default:
     include "includes/view_all_comments.php";
-    break;
   }
 
 ?>
