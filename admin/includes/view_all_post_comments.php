@@ -16,8 +16,13 @@
               </thead>
               <tbody>
 <?php
-  $post_id = mysqli_real_escape_string($_GET['id']);
-  $query = "SELECT * FROM comments WHERE comment_post_id = $post_id ";
+
+if (isset($_GET['p_id'])) {
+
+  $comments_post_id = $_GET['p_id'];
+  $comments_post_id = escapeString($connection, $comments_post_id);
+
+  $query = "SELECT * FROM comments WHERE comment_post_id = $comments_post_id ";
   $select_comments = mysqli_query($connection, $query);
 
   while ($row = mysqli_fetch_assoc($select_comments)) {
@@ -53,6 +58,8 @@
     echo "</tr>";
 
   }
+}
+
 ?>
 
               </tbody>
