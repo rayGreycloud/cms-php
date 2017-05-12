@@ -1,4 +1,26 @@
 <?php include "./includes/admin_header.php" ?>
+<?php
+
+$session = session_id();
+$time = time();
+$time_out_in_seconds = 60;
+$time_out = $time -$time_out_in_seconds;
+
+$query = "SELECT * FROM users_online WHERE session = '$session'";
+$get_users_query = mysqli_query($connection, $query);
+$user_count = mysqli_num_rows($get_users_query);
+
+if ($user_count == NULL) {
+  $query = "INSERT INTO users_online(session, time) ";
+  $query .= "VALUES ('$session', '$time')";
+  $user_session_query = mysqli_query($connection, $query);
+  confirmQuery($user_session_query);
+
+} else {
+
+}
+
+ ?>
 
   <div id="wrapper">
 
