@@ -86,10 +86,11 @@ if (isset($_POST['create_comment'])) {
 
     confirmQuery($create_comment_query);
 
-    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+/*    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
     $query .= "WHERE post_id = $comment_post_id ";
     $increment_comment_count_query = mysqli_query($connection, $query);
     confirmQuery($increment_comment_count_query);
+*/
 
   } else {
     echo "<script>alert('All fields are required')</script>";
