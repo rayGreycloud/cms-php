@@ -21,7 +21,7 @@ function insert_categories() {
   global $connection;
 
   if (isset($_POST['submit'])) {
-    $cat_title = $_POST['cat_title'];
+    $cat_title = escape($_POST['cat_title']);
 
     if ($cat_title == "" || empty($cat_title)) {
       echo "This field is required!";
@@ -61,7 +61,7 @@ function deleteCategory() {
   global $connection;
 
   if (isset($_GET['delete'])) {
-    $cat_id_to_delete = $_GET['delete'];
+    $cat_id_to_delete = escape($_GET['delete']);
 
     $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
     $delete_category_query = mysqli_query($connection, $query);
@@ -74,7 +74,7 @@ function selectCategoryToEdit() {
   global $connection;
 
   if (isset($_GET['edit'])) {
-    $cat_id = $_GET['edit'];
+    $cat_id = escape($_GET['edit']);
     include "includes/update_categories.php";
   }
 }
