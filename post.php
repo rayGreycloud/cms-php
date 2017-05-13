@@ -19,7 +19,7 @@
 <?php
 
 if (isset($_GET['p_id'])) {
-  $post_to_show_id = $_GET['p_id'];
+  $post_to_show_id = escape($_GET['p_id']);
 
   $query = "UPDATE posts SET post_views_count = post_views_count + 1 ";
   $query .= "WHERE post_id = $post_to_show_id ";
@@ -68,7 +68,7 @@ if (isset($_GET['p_id'])) {
 <!-- Blog Comments -->
 <!-- Posted Comments -->
 <?php
-$comment_post_id = $_GET['p_id'];
+$comment_post_id = escape($_GET['p_id']);
 $query = "SELECT * FROM comments WHERE comment_post_id = $comment_post_id ";
 $query .= "AND comment_status = 'approved' ";
 $query .= "ORDER BY comment_id DESC ";
@@ -104,11 +104,11 @@ while ($row = mysqli_fetch_array($select_comment_query)) {
 
 if (isset($_POST['create_comment'])) {
 
-  $comment_post_id = $_GET['p_id'];
-  $comment_author = escapeString($connection, $_POST['comment_author']);
-  $comment_email = escapeString($connection, $_POST['comment_email']);
+  $comment_post_id = escape($_GET['p_id']escape(;
+  $comment_author = escape($_POST['comment_author']);
+  $comment_email = escape($_POST['comment_email']);
   $comment_status = "pending";
-  $comment_content = escapeString($connection, $_POST['comment_content']);
+  $comment_content = escape($_POST['comment_content']);
 
   if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
