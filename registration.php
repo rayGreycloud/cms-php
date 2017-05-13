@@ -4,15 +4,11 @@
 
   if (isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
+    $username = escape($_POST['username']);
+    $password = escape($_POST['password']);
+    $email = escape($_POST['email']);
 
     if (!empty($username) && !empty($email) && !empty($password)) {
-
-      $username = mysqli_real_escape_string($connection, $username);
-      $password = mysqli_real_escape_string($connection, $password);
-      $email = mysqli_real_escape_string($connection, $email);
 
       $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
