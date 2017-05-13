@@ -29,14 +29,14 @@
 
   if (isset($_POST['edit_user'])) {
 
-    $username = $_POST['username'];
-    $user_password = $_POST['user_password'];
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $user_email = $_POST['user_email'];
-    $user_image = $_FILES['user_image']['name'];
+    $username = escape($_POST['username']);
+    $user_password = escape($_POST['user_password']);
+    $user_firstname = escape($_POST['user_firstname']);
+    $user_lastname = escape($_POST['user_lastname']);
+    $user_email = escape($_POST['user_email']);
+    $user_image = escape($_FILES['user_image']['name']);
     $user_image_temp = $_FILES['user_image']['tmp_name'];
-    $user_role = $_POST['user_role'];
+    $user_role = escape($_POST['user_role']);
 
     move_uploaded_file($user_image_temp, "../images/$user_image");
 
