@@ -19,8 +19,8 @@
 <?php
 
   if (isset($_GET['p_id'])) {
-    $selected_post_id = $_GET['p_id'];
-    $selected_author = $_GET['author'];
+    $selected_post_id = escape($_GET['p_id']);
+    $selected_author = escape($_GET['author']);
   }
 
   $query = "SELECT * FROM posts WHERE post_author = '{$selected_author}' ";
@@ -57,7 +57,7 @@
 
 <!-- Posted Comments -->
 <?php
-$comment_post_id = $_GET['p_id'];
+$comment_post_id = escape($_GET['p_id']);
 $query = "SELECT * FROM comments WHERE comment_post_id = $comment_post_id ";
 $query .= "AND comment_status = 'approved' ";
 $query .= "ORDER BY comment_id DESC ";
