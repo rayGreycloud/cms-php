@@ -10,10 +10,10 @@ function confirmQuery($result) {
   return $result;
 }
 
-function escapeString($connection, $string) {
+function escape($string) {
   global $connection;
 
-  return mysqli_real_escape_string($connection, $string);
+  return mysqli_real_escape_string($connection, trim($string));
 }
 
 ?>
