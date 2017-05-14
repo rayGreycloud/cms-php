@@ -6,7 +6,7 @@ $msg = '';
 
 if (isset($_POST['submit'])) {
 
-  require "require ./PHPMailer/PHPMailerAutoload.php";
+  require " /PHPMailer/PHPMailerAutoload.php";
 
   $mail = new PHPMailer;
   $mail->isSMTP();
