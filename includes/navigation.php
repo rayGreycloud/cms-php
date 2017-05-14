@@ -28,10 +28,12 @@
   }
 
 ?>
+      </ul>
 
-    <li>
-      <a href="admin">Admin</a>
-    </li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="admin">ADMIN</a></li>
+        <li><a href="registration.php">REGISTER</a></li>
+        <li><a href="contact.php">CONTACT</a></li>
 
 <?php
   if (isset($_SESSION['user_role'])) {
