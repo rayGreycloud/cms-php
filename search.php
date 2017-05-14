@@ -40,7 +40,7 @@ if(isset($_POST['submit'])) {
       $post_date = $row['post_date'];
       $post_image = $row['post_image'];
       $post_content = $row['post_content'];
-  ?>
+ ?>
 
       <!-- Blog Post Template -->
       <h2>
@@ -58,7 +58,7 @@ if(isset($_POST['submit'])) {
 
       <hr>
 
-  <?php }
+<?php }
 
   }
 }
