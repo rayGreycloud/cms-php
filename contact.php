@@ -56,7 +56,7 @@ EOT;
           <div class="form-wrap">
           <h1>Make Contact</h1>
             <form role="form" action="" method="post" id="contact-form" autocomplete="off">
-              <h6 class="text-center"><?php echo $message; ?></h6>
+              <h6 class="text-center"><?php echo $msg; ?></h6>
               <div class="form-group">
                 <label for="name" class="sr-only">Your Name</label>
                 <input type="text" name="name" id="contact-name" class="form-control" placeholder="Your Name">
