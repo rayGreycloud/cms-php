@@ -3,14 +3,17 @@
 <?php
 
   if (isset($_POST['submit'])) {
+    $name = escape($_POST['name']);
+    $from = escape($_POST['email']);
+    $body = wordwrap(escape($_POST['message']), 70);
 
-    $contact_name = escape($_POST['name']);
-    $contact_email = escape($_POST['email']);
-    $contact_message = escape($_POST['message']);
+    $to = "raygreycloud@gmail.com";
+    $subject = "Message from <?php echo $name; ?>";
+    $headers = "From: <?php echo $from; ?>" . "\r\n";
 
     if (!empty($contact_name) && !empty($contact_email) && !empty($contact_message)) {
 
-// Message handling
+      mail($to,$subject,$body,$headers);
 
       $message = "Message sent";
     } else {
@@ -34,7 +37,7 @@
         <div class="col-xs-6 col-xs-offset-3">
           <div class="form-wrap">
           <h1>Make Contact</h1>
-            <form role="form" action="contact.php" method="post" id="contact-form" autocomplete="off">
+            <form role="form" action="" method="post" id="contact-form" autocomplete="off">
               <h6 class="text-center"><?php echo $message; ?></h6>
               <div class="form-group">
                 <label for="name" class="sr-only">Your Name</label>
