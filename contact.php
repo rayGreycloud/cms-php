@@ -2,26 +2,44 @@
 <?php  include "includes/header.php"; ?>
 <?php
 
-  if (isset($_POST['submit'])) {
-    $name = escape($_POST['name']);
-    $from = escape($_POST['email']);
-    $body = wordwrap(escape($_POST['message']), 70);
+$msg = '';
 
-    $to = "raygreycloud@gmail.com";
-    $subject = "Message from <?php echo $name; ?>";
-    $headers = "From: <?php echo $from; ?>" . "\r\n";
+if (isset($_POST['submit'])) {
 
-    if (!empty($contact_name) && !empty($contact_email) && !empty($contact_message)) {
+  require "require ./PHPMailer/PHPMailerAutoload.php";
 
-      mail($to,$subject,$body,$headers);
+  $mail = new PHPMailer;
+  $mail->isSMTP();
+  $mail->Host = 'localhost';
+  $mail->Port = 80;
 
-      $message = "Message sent";
+  $mail->setFrom('from@raygreycloud.com', 'raygreycloud.com');
+  $mail->addAddress('raygreycloud@gmail.com', 'Ray Greycloud');
+
+
+  $name = escape($_POST['name']);
+  $email = escape($_POST['email']);
+  $message = wordwrap(escape($_POST['message']), 70);
+
+  if ($mail->addReplyTo($email, $name)) {
+    $mail->Subject = "Message from <?php echo $name; ?>";
+    $mail->isHTML(false);
+
+    $mail->Body = <<<EOT
+Email: {$email}
+Name: {$name}
+Message: {$message}
+EOT;
+
+    if (!$mail->send()) {
+      $msg = 'Sorry, something went wrong. Please try again later.';
     } else {
-      $message = "All fields are required";
+      $msg = 'Message sent! Thanks for contacting us.';
     }
   } else {
-    $message = "";
+    $msg = 'Invalid email address, message ignored.';
   }
+}
 
 ?>
 
@@ -49,7 +67,7 @@
               </div>
               <div class="form-group">
                 <label for="message" class="sr-only">Your Message</label>
-                <textarea class="form-control" name="message" id="contact-message" cols="30" rows="6" placeholder="Your Message"></textarea>
+                <textarea class="form-control" name="message" id="contact-message" cols="20" rows="8" placeholder="Your Message"></textarea>
               </div>
 
 
