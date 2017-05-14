@@ -1,29 +1,24 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 <?php
-  //
-  // if (isset($_POST['submit'])) {
-  //
-  //   $username = escape($_POST['username']);
-  //   $password = escape($_POST['password']);
-  //   $email = escape($_POST['email']);
-  //
-  //   if (!empty($username) && !empty($email) && !empty($password)) {
-  //
-  //     $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-  //
-  //     $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
-  //     $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$email}', 'subscriber') ";
-  //     $register_user_query = mysqli_query($connection, $query);
-  //     confirmQuery($register_user_query);
-  //
-  //     $message = "Registration successful";
-  //   } else {
-  //     $message = "All fields are required";
-  //   }
-  // } else {
+
+  if (isset($_POST['submit'])) {
+
+    $contact_name = escape($_POST['name']);
+    $contact_email = escape($_POST['email']);
+    $contact_message = escape($_POST['message']);
+
+    if (!empty($contact_name) && !empty($contact_email) && !empty($contact_message)) {
+
+// Message handling
+
+      $message = "Message sent";
+    } else {
+      $message = "All fields are required";
+    }
+  } else {
     $message = "";
-  // }
+  }
 
 ?>
 
