@@ -1,4 +1,7 @@
-<?php include "./includes/admin_header.php" ?>
+<?php
+include "./includes/admin_header.php";
+include("./includes/modal_delete.php");
+ ?>
 
   <div id="wrapper">
 

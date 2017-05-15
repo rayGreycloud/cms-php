@@ -51,7 +51,9 @@ function findAllCategories() {
     echo "<tr>";
     echo "<td>{$cat_id}</td>";
     echo "<td>{$cat_title}</td>";
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this category: {$cat_title}?') \" href='categories.php?delete={$cat_id}'>Delete</a></td>";
+
+    echo "<td><a href='javascript:void(0)' data-cat-id='{$cat_id}' class='delete-cat__link'>Delete</a></td>";
+    
     echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
     echo "</tr>";
   }
@@ -69,7 +71,24 @@ function deleteCategory() {
     header("Location: categories.php");
   }
 }
+ ?>
+ <script>
 
+   $(document).ready(function() {
+     $('.delete-cat__link').on('click', function() {
+
+       var cat_id = this.dataset.catId;
+       var url_delete_cat = `categories.php?delete=${cat_id} `;
+
+       $('.modal_delete_link').attr('href', url_delete_cat);
+
+       $('#modalDelete').modal('show');
+     });
+   });
+
+ </script>
+
+<?php
 function selectCategoryToEdit() {
   global $connection;
 
