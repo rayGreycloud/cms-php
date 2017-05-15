@@ -1,6 +1,6 @@
 <?php
 
-include("delete_modal.php");
+include("modal_delete.php");
 
 if (isset($_POST['checkBoxArray'])) {
 
