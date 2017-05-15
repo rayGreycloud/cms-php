@@ -115,7 +115,7 @@
 
               <div class="form-group">
                 <label for="user_image">Image</label>
-                <img width='100rem' src="../images/<?php echo $user_image; ?>" alt="">
+                <img width='100rem' src="../images/user/<?php echo $user_image; ?>" alt="">
                 <input type="file" name="user_image">
               </div>
 
