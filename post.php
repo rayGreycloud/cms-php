@@ -104,7 +104,7 @@ while ($row = mysqli_fetch_array($select_comment_query)) {
 
 if (isset($_POST['create_comment'])) {
 
-  $comment_post_id = escape($_GET['p_id']escape(;
+  $comment_post_id = escape($_GET['p_id']);
   $comment_author = escape($_POST['comment_author']);
   $comment_email = escape($_POST['comment_email']);
   $comment_status = "pending";
