@@ -1,3 +1,4 @@
+<?php include("modal_delete.php"); ?>
 
             <table class="table table-bordered table-hover">
               <thead>
@@ -42,7 +43,7 @@
     echo "<td><img width='50rem' src='../images/user/$user_image'></td>";
     echo "<td>" . ucfirst($user_role) . "</td>";
     echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user: {$username}?') \" href='users.php?delete={$user_id}'>Delete</a></td>";
+    echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link'>delete</a></td>";
     echo "<tr>";
 
   }
@@ -71,3 +72,19 @@ if (isset($_GET['delete'])) {
 }
 
 ?>
+
+<script>
+
+  $(document).ready(function() {
+    $('.delete-user__link').on('click', function() {
+
+      var user_id = this.dataset.userId;
+      var url_delete_user = `users.php?delete=${user_id} `;
+
+      $('.modal_delete_link').attr('href', url_delete_user);
+
+      $('#modalDelete').modal('show');
+    });
+  });
+
+</script>
