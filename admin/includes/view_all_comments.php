@@ -1,3 +1,4 @@
+<?php include("modal_delete.php"); ?>
 
             <table class="table table-bordered table-hover">
               <thead>
@@ -49,7 +50,7 @@
 
     echo "<td><a href='comments.php?approve=$comment_id'>approve</a></td>";
     echo "<td><a href='comments.php?reject={$comment_id}'>reject</a></td>";
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this comment?') \" href='comments.php?delete={$comment_id}'>delete</a></td>";
+    echo "<td><a href='javascript:void(0)' data-comment-id='{$comment_id}' class='delete-comment__link'>Delete</a></td>";
     echo "</tr>";
 
   }
@@ -95,3 +96,19 @@ if (isset($_GET['delete'])) {
 }
 
 ?>
+
+<script>
+
+  $(document).ready(function() {
+    $('.delete-comment__link').on('click', function() {
+
+      var comment_id = this.dataset.commentId;
+      var url_delete_comment = `comments.php?delete=${comment_id} `;
+
+      $('.modal_delete_link').attr('href', url_delete_comment);
+
+      $('#modalDelete').modal('show');
+    });
+  });
+
+</script>
