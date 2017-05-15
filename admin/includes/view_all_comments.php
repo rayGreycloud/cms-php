@@ -48,9 +48,9 @@
     echo "<td>$comment_date</td>";
     echo "<td>$comment_status</td>";
 
-    echo "<td><a href='comments.php?approve=$comment_id'>approve</a></td>";
-    echo "<td><a href='comments.php?reject={$comment_id}'>reject</a></td>";
-    echo "<td><a href='javascript:void(0)' data-comment-id='{$comment_id}' class='delete-comment__link'>delete</a></td>";
+    echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
+    echo "<td><a href='comments.php?reject={$comment_id}'>Reject</a></td>";
+    echo "<td><a href='javascript:void(0)' data-comment-id='{$comment_id}' class='delete-comment__link'>Delete</a></td>";
     echo "</tr>";
 
   }

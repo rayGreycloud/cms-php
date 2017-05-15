@@ -43,7 +43,7 @@
     echo "<td><img width='50rem' src='../images/user/$user_image'></td>";
     echo "<td>" . ucfirst($user_role) . "</td>";
     echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-    echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link'>delete</a></td>";
+    echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link'>Delete</a></td>";
     echo "<tr>";
 
   }
