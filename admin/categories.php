@@ -1,6 +1,6 @@
 <?php
 include "./includes/admin_header.php";
-include("./includes/modal_delete.php");
+include "./includes/modal_delete.php";
  ?>
 
   <div id="wrapper">
@@ -45,12 +45,29 @@ include("./includes/modal_delete.php");
                   <tr>
                     <th>Id</th>
                     <th>Category Title</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
 
 <?php findAllCategories() ?>
 <?php deleteCategory() ?>
+<script>
+
+  $(document).ready(function() {
+    $('.delete-cat__link').on('click', function() {
+
+      var cat_id = this.dataset.catId;
+      var url_delete_cat = `categories.php?delete=${cat_id} `;
+
+      $('.modal_delete_link').attr('href', url_delete_cat);
+
+      $('#modalDelete').modal('show');
+    });
+  });
+
+</script>
 
                 </tbody>
               </table>
