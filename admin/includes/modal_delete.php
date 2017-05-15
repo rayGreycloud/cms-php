@@ -1,7 +1,3 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete">
-  Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDelete" aria-hidden="true">
@@ -15,7 +11,7 @@
 
       </div>
       <div class="modal-body">
-        <h4>Are you sure you want to delete this?</h4>
+        <h5 class="text-center">Are you sure you want to delete this?</h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
