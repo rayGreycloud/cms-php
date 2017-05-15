@@ -1,9 +1,6 @@
 </div>
 <!-- /#wrapper -->
 
-  <!-- jQuery -->
-  <script src="js/jquery.js"></script>
-
   <!-- custom js -->
   <script src="./js/scripts.js"></script>
 
