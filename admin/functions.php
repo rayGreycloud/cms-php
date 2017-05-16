@@ -79,7 +79,7 @@ function selectCategoryToEdit() {
   }
 }
 
-function recordCount($table) {
+function allRecordsCount($table) {
   global $connection;
 
   $query = "SELECT * FROM " . $table;
@@ -89,4 +89,14 @@ function recordCount($table) {
   return mysqli_num_rows($select_all_records);
 }
 
+function activityRecordsCount($table, $field, $value) {
+
+  $query = "SELECT * FROM " . $table . " WHERE " . $field . " = " . $value;
+  $activity_records = mysqli_query($connection, $query);
+  confirmQuery($activity_records);
+
+  return mysqli_num_rows($activity_records);
+}
+
+function
  ?>
