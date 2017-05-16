@@ -31,12 +31,13 @@ if (isset($_POST['checkBoxArray'])) {
         confirmQuery($post_to_clone_query);
 
         while ($row = mysqli_fetch_array($post_to_clone_query)) {
-          $post_author = $row['post_author'];
-          $post_title = $row['post_title'];
-          $post_category_id = $row['post_category_id'];
-          $post_status = $row['post_status'];
-          $post_image = $row['post_image'];
-          $post_tags = $row['post_tags'];
+          $post_author = escape($row['post_author']);
+          $post_title = escape($row['post_title']);
+          $post_category_id = escape($row['post_category_id']);
+          $post_status = escape($row['post_status']);
+          $post_image = escape($row['post_image']);
+          $post_content = escape($row['post_content']);
+          $post_tags = escape($row['post_tags']);
           $post_comment_count = 0;
         }
 
