@@ -4,7 +4,7 @@
     $post_author = escape($_POST['post_author']);
     $post_title = escape($_POST['post_title']);
     $post_category_id = escape($_POST['post_category_id']);
-    $post_status = escape($_POSTescape['post_status']);
+    $post_status = escape($_POST['post_status']);
 
     $post_image = escape($_FILES['post_image']['name']);
     $post_image_temp = $_FILES['post_image']['tmp_name'];
@@ -14,7 +14,7 @@
     $post_date = date('d-m-y');
     $post_content = escape($_POST['post_content']);
 
-    move_uploaded_file($post_image_temp, "../images/users/$post_image");
+    move_uploaded_file($post_image_temp, "../images/user/$post_image");
 
     $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
 
