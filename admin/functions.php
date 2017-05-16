@@ -90,13 +90,14 @@ function allRecordsCount($table) {
 }
 
 function activityRecordsCount($table, $field, $value) {
+  global $connection;
 
-  $query = "SELECT * FROM " . $table . " WHERE " . $field . " = " . $value;
+  $query = "SELECT * FROM " . $table . " WHERE " . $field . " = '" . $value . "'";
+
   $activity_records = mysqli_query($connection, $query);
   confirmQuery($activity_records);
 
   return mysqli_num_rows($activity_records);
 }
 
-function
  ?>
