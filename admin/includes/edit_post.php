@@ -5,6 +5,7 @@
 
     $query = "SELECT * FROM posts WHERE post_id = {$post_id_to_edit}";
     $get_post_to_edit_query = mysqli_query($connection, $query);
+    confirmQuery($get_post_to_edit_query);
 
     while($row = mysqli_fetch_assoc($get_post_to_edit_query)) {
       $post_id = $row['post_id'];
@@ -54,7 +55,6 @@
       $query .= "WHERE post_id = $post_id_to_edit ";
 
       $update_post_query = mysqli_query($connection, $query);
-
       confirmQuery($update_post_query);
 
       echo "<p class='bg-success'>Post Updated / <a href='./../post.php?p_id={$post_id_to_edit}'>View Post</a> / <a href='./posts.php'>View All Posts</a></p>";
@@ -84,7 +84,8 @@
 
   $query1 = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
   $current_cat_query = mysqli_query($connection, $query1);
-
+  confirmQuery($current_cat_query);
+  
   while($row = mysqli_fetch_assoc($current_cat_query)) {
     $current_cat_title = ucfirst($row['cat_title']);
     echo "<option value='$post_category_id'>{$current_cat_title}</option>";
@@ -92,6 +93,7 @@
 
   $query = "SELECT * FROM categories";
   $select_categories_query = mysqli_query($connection, $query);
+  confirmQuery($select_categories_query);
 
   while($row = mysqli_fetch_assoc($select_categories_query)) {
     $cat_id = $row['cat_id'];
