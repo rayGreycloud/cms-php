@@ -108,6 +108,9 @@ if (isset($_POST['checkBoxArray'])) {
     $post_views_count = $row['post_views_count'];
     $post_date = $row['post_date'];
 
+    if (empty($post_tags)) {
+      $post_tags = 'none';
+    }
     echo "<tr>";
 ?>
     <td><input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="<?php echo $post_id; ?>"></td>
