@@ -18,13 +18,34 @@
 
 <?php
 
-  $query = "SELECT * FROM categories";
+  $query = "SELECT * FROM categories LIMIT 4";
   $select_all_categories_query = mysqli_query($connection, $query);
 
   while($row = mysqli_fetch_assoc($select_all_categories_query)) {
+    $cat_id = $row['cat_id'];
     $cat_title = $row['cat_title'];
 
-    echo "<li><a href='#'>{$cat_title}</a></li>";
+    $category_class = '';
+    $register_class = '';
+    $contact_class = '';
+
+    $pagename = basename($_SERVER['PHP_SELF']);
+
+    if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
+
+      $category_class = 'active';
+
+    } else if ($pagename == 'registration.php') {
+
+      $register_class = 'active';
+
+    } else if ($pagename == 'contact.php') {
+
+      $contact_class = 'active';
+
+    }
+
+    echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
   }
 
 ?>
@@ -32,8 +53,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="admin">ADMIN</a></li>
-        <li><a href="registration.php">REGISTER</a></li>
-        <li><a href="contact.php">CONTACT</a></li>
+        <li class="<?php echo $register_class; ?>"><a href="registration.php">REGISTER</a></li>
+        <li class="<?php echo $contact_class; ?>"><a href="contact.php">CONTACT</a></li>
 
 <?php
   if (isset($_SESSION['user_role'])) {
