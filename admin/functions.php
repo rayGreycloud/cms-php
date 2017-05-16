@@ -31,9 +31,7 @@ function insert_categories() {
 
       $create_category_query = mysqli_query($connection, $query);
 
-      if (!$create_category_query) {
-        die('QUERY FAILED ' . mysqli_error($connection));
-      }
+      confirmQuery($create_category_query);
     }
   }
 }
@@ -43,6 +41,7 @@ function findAllCategories() {
 
   $query = "SELECT * FROM categories";
   $select_categories = mysqli_query($connection, $query);
+  confirmQuery($select_categories);
 
   while($row = mysqli_fetch_assoc($select_categories)) {
     $cat_id = $row['cat_id'];
@@ -65,13 +64,12 @@ function deleteCategory() {
 
     $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
     $delete_category_query = mysqli_query($connection, $query);
-    // Refresh page
+    confirmQuery($delete_category_query);
+
     header("Location: categories.php");
   }
 }
- ?>
 
-<?php
 function selectCategoryToEdit() {
   global $connection;
 
@@ -81,4 +79,14 @@ function selectCategoryToEdit() {
   }
 }
 
-?>
+function recordCount($table) {
+  global $connection;
+
+  $query = "SELECT * FROM " . $table;
+  $select_all_records = mysqli_query($connection, $query);
+  confirmQuery($select_all_records);
+
+  return mysqli_num_rows($select_all_records);
+}
+
+ ?>
