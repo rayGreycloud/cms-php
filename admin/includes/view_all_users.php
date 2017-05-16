@@ -29,6 +29,13 @@
     $user_image = $row['user_image'];
     $user_role = $row['user_role'];
 
+    if (empty($user_firstname)) {
+      $user_firstname = 'n/a';
+    }
+    if (empty($user_lastname)) {
+      $user_lastname = 'n/a';
+    }
+
     echo "<tr>";
     echo "<td>$user_id</td>";
     echo "<td>$username</td>";
