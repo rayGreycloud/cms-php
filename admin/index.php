@@ -59,7 +59,7 @@ $users_online_count = mysqli_num_rows($users_online_query);
                   <div class="col-xs-9 text-right">
 <?php
 
-  $post_count = recordCount('posts');
+  $post_count = allRecordsCount('posts');
 
   echo "<div class='huge'>{$post_count}</div>"
 ?>
@@ -88,7 +88,7 @@ $users_online_count = mysqli_num_rows($users_online_query);
 
 <?php
 
-  $comment_count = recordCount('comments');
+  $comment_count = allRecordsCount('comments');
 
   echo "<div class='huge'>{$comment_count}</div>"
 ?>
@@ -117,7 +117,7 @@ $users_online_count = mysqli_num_rows($users_online_query);
 
 <?php
 
-  $user_count = recordCount('users');
+  $user_count = allRecordsCount('users');
 
   echo "<div class='huge'>{$user_count}</div>"
 ?>
@@ -146,7 +146,7 @@ $users_online_count = mysqli_num_rows($users_online_query);
 
 <?php
 
-  $category_count = recordCount('categories');
+  $category_count = allRecordsCount('categories');
 
   echo "<div class='huge'>{$category_count}</div>"
 ?>
@@ -167,30 +167,17 @@ $users_online_count = mysqli_num_rows($users_online_query);
 
 <?php
 
-  $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-  $select_all_draft_posts = mysqli_query($connection, $query);
-  $draft_post_count = mysqli_num_rows($select_all_draft_posts);
+  $draft_post_count = activityRecordsCount('posts', 'post_status', 'draft');
 
-  $query = "SELECT * FROM posts WHERE post_status = 'published'";
-  $select_all_published_posts = mysqli_query($connection, $query);
-  $published_post_count = mysqli_num_rows($select_all_published_posts);
+  $published_post_count = activityRecordsCount('posts', 'post_status', 'published');
 
-  $query = "SELECT * FROM comments WHERE comment_status = 'approved'";
-  $select_all_approved_comments = mysqli_query($connection, $query);
-  $approved_comment_count = mysqli_num_rows($select_all_approved_comments);
+  $approved_comment_count = activityRecordsCount('comments', 'comment_status', 'approved');
 
-  $query = "SELECT * FROM comments WHERE comment_status = 'pending'";
-  $select_all_pending_comments = mysqli_query($connection, $query);
-  $pending_comment_count = mysqli_num_rows($select_all_pending_comments);
+  $pending_comment_count = activityRecordsCount('comments', 'comment_status', 'pending');
 
-  $query = "SELECT * FROM users WHERE user_role = 'admin'";
-  $select_all_admins = mysqli_query($connection, $query);
-  $admin_count = mysqli_num_rows($select_all_admins);
+  $admin_count = activityRecordsCount('users', 'user_role', 'admin');
 
-  $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-  $select_all_subscribers = mysqli_query($connection, $query);
-  $subscriber_count = mysqli_num_rows($select_all_subscribers);
-
+  $subscriber_count = activityRecordsCount('users', 'user_role', 'subscriber');
 
 ?>
 
