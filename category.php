@@ -18,21 +18,34 @@
 
 <?php
 
-  if (isset($_GET['category'])) {
-    $post_category_id = escape($_GET['category']);
-  }
+if (isset($_GET['category'])) {
+  $post_category_id = escape($_GET['category']);
 
-  $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id ";
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_category_id = ?";
+
+  if($_SESSION['user_role'] != 'admin') {
+    $query .= " AND post_status = ?";
+    $published = 'published';
+  }
+  
+  $stmt = mysqli_prepare($connection, $query);
+
   $select_posts_by_category_query = mysqli_query($connection, $query);
   confirmQuery($select_posts_by_category_query);
 
-  while($row = mysqli_fetch_assoc($select_posts_by_category_query)) {
-    $post_id = $row['post_id'];
-    $post_title = $row['post_title'];
-    $post_author = $row['post_author'];
-    $post_date = $row['post_date'];
-    $post_image = $row['post_image'];
-    $post_content = substr($row['post_content'],0,222);
+  if (mysqli_num_rows($select_posts_by_category_query) < 1) {
+
+    echo "<h3 class='text-center'>No posts available in that category</h3>";
+  } else {
+
+    while($row = mysqli_fetch_assoc($select_posts_by_category_query)) {
+      $post_id = $row['post_id'];
+      $post_title = $row['post_title'];
+      $post_author = $row['post_author'];
+      $post_date = $row['post_date'];
+      $post_image = $row['post_image'];
+      $post_content = substr($row['post_content'],0,222);
 
 ?>
 
@@ -52,7 +65,11 @@
 
         <hr>
 
-<?php } ?>
+<?php
+    }
+  }
+}
+ ?>
 
         <!-- Pager -->
         <ul class="pager">
