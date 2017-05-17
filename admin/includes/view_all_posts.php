@@ -92,7 +92,14 @@ if (isset($_POST['checkBoxArray'])) {
 
 <?php
 
-  $query = "SELECT * FROM posts ORDER BY post_id DESC";
+  // $query = "SELECT * FROM posts ORDER BY post_id DESC";
+  $query = "SELECT posts.post_id, posts.post_author, posts.post_title, ";
+  $query .= "posts.post_category_id, posts.post_status, posts.post_image, ";
+  $query .= "posts.post_tags, posts.post_comment_count, posts.post_views_count, ";
+  $query .= "posts.post_date, categories.cat_id, categories.cat_title ";
+  $query .= "FROM posts";
+  $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id";
+
   $select_posts = mysqli_query($connection, $query);
   confirmQuery($select_posts);
 
