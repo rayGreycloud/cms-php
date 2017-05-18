@@ -23,18 +23,25 @@
     $selected_author = escape($_GET['author']);
   }
 
-  $query = "SELECT * FROM posts WHERE post_author = '{$selected_author}' ";
-  $select_author_query = mysqli_query($connection, $query);
-  confirmQuery($select_author_query);
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_author = ?";
 
-  while ($row = mysqli_fetch_assoc($select_author_query)) {
+  $stmt = mysqli_prepare($connection, $query);
 
-    $post_id = $row['post_id'];
-    $post_title = $row['post_title'];
-    $post_author = $row['post_author'];
-    $post_date = $row['post_date'];
-    $post_image = $row['post_image'];
-    $post_content = $row['post_content'];
+  mysqli_stmt_bind_param($stmt, "s", $selected_author);
+
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+
+  mysqli_stmt_store_result($stmt);
+
+  if (mysqli_stmt_num_rows($stmt) == 0) {
+      echo "<h2 class='text-center'>No posts found.</h2>";
+  } else {
+    while(mysqli_stmt_fetch($stmt)):
+
+    $post_content = substr($post_content,0,222);
 
 ?>
 
@@ -53,22 +60,31 @@
 
         <hr>
 
-<?php } ?>
+<?php
+    endwhile;
+}
+ ?>
 
 <!-- Posted Comments -->
 <?php
 $comment_post_id = escape($_GET['p_id']);
-$query = "SELECT * FROM comments WHERE comment_post_id = $comment_post_id ";
-$query .= "AND comment_status = 'approved' ";
-$query .= "ORDER BY comment_id DESC ";
-$select_comment_query = mysqli_query($connection, $query);
-confirmQuery($select_comment_query);
 
-while ($row = mysqli_fetch_array($select_comment_query)) {
-  $comment_date = $row['comment_date'];
-  $comment_content = $row['comment_content'];
-  $comment_author = $row['comment_author'];
+$query = "SELECT comment_date, comment_content, comment_author, "
+$query .= "comment_post_id FROM comments WHERE comment_post_id = ? ";
+$query .= "AND comment_status = ? ORDER BY comment_id DESC ";
+$approved = 'approved';
 
+$stmt = mysqli_prepare($connection, $query);
+
+mysqli_stmt_bind_param($stmt, "i", $comment_post_id);
+
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt, $comment_date, $comment_content, $comment_author, $comment_post_id);
+
+mysqli_stmt_store_result($stmt);
+
+while(mysqli_stmt_fetch($stmt)):
 ?>
 
 <!-- Comment -->
@@ -85,8 +101,10 @@ while ($row = mysqli_fetch_array($select_comment_query)) {
   </div>
 </div>
 
-<?php } ?>
+<?php
+    endwhile;
 
+ ?>
         <!-- Pager -->
         <ul class="pager">
             <li class="previous">
