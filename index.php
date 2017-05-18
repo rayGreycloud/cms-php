@@ -17,21 +17,27 @@
         </h1>
 
 <?php
-  $query = "SELECT * FROM posts WHERE post_status = 'published' ";
-  $select_all_posts_query = mysqli_query($connection, $query);
-  confirmQuery($select_all_posts_query);
 
-  if (mysqli_num_rows($select_all_posts_query) == 0) {
+$query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+$query .= "FROM posts WHERE post_status = ?";
+$published = 'published';
+
+$stmt = mysqli_prepare($connection, $query);
+
+mysqli_stmt_bind_param($stmt, "s", $published);
+
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+
+mysqli_stmt_store_result($stmt);
+
+if (mysqli_stmt_num_rows($stmt) == 0) {
     echo "<h2 class='text-center'>No posts found.</h2>";
-  } else {
+} else {
+  while(mysqli_stmt_fetch($stmt)):
 
-    while($row = mysqli_fetch_assoc($select_all_posts_query)) {
-      $post_id = $row['post_id'];
-      $post_title = $row['post_title'];
-      $post_author = $row['post_author'];
-      $post_date = $row['post_date'];
-      $post_image = $row['post_image'];
-      $post_content = substr($row['post_content'],0,222);
+  $post_content = substr($post_content,0,222);
 
 ?>
 
@@ -54,9 +60,9 @@
         <hr>
 
 <?php
-      }
-    }
-?>
+    endwhile;
+}
+ ?>
 
         <!-- Pager -->
         <ul class="pager">
