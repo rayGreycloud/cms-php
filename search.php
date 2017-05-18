@@ -20,50 +20,51 @@
 if(isset($_POST['submit'])) {
   $search = escape($_POST['search']);
 
-  $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' ";
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_tags LIKE ? ";
+  $search_term = $search . '%';
 
-  $search_query = mysqli_query($connection, $query);
+  $stmt = mysqli_prepare($connection, $query);
 
-  if (!$search_query) {
-    die("QUERY FAILED: " . mysqli_error($connection));
-  }
+  mysqli_stmt_bind_param($stmt, "s", $search_term);
 
-  $count = mysqli_num_rows($search_query);
+  mysqli_stmt_execute($stmt);
 
-  if ($count == 0) {
-    echo "<h2>No results found.</h2>";
+  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+
+  mysqli_stmt_store_result($stmt);
+
+  if (mysqli_stmt_num_rows($stmt) == 0) {
+      echo "<h2 class='text-center'>No posts found.</h2>";
   } else {
+    while(mysqli_stmt_fetch($stmt)):
 
-    while($row = mysqli_fetch_assoc($search_query)) {
-      $post_title = $row['post_title'];
-      $post_author = $row['post_author'];
-      $post_date = $row['post_date'];
-      $post_image = $row['post_image'];
-      $post_content = $row['post_content'];
+    $post_content = substr($post_content,0,222);
+
  ?>
 
       <!-- Blog Post Template -->
       <h2>
-        <a href="#"><?php echo $post_title ?></a>
+        <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
       </h2>
       <p class="lead">
         by <a href="index.php"><?php echo $post_author ?></a>
       </p>
       <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
       <hr>
-      <img class="img-responsive" src="<?php echo $post_image ?>" alt="">
+      <img class="img-responsive" src="./images/user/<?php echo $post_image ?>" alt="">
       <hr>
       <p><?php echo $post_content ?></p>
-      <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+      <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
       <hr>
 
-<?php }
-
+<?php
+    endwhile;
   }
 }
+ ?>
 
-?>
 
       <!-- Pager -->
       <ul class="pager">
