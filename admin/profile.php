@@ -3,27 +3,28 @@
 <?php
 
   if (isset($_SESSION['username'])) {
+
     $username = $_SESSION['username'];
 
     $query = "SELECT * FROM users WHERE username = '{$username}' ";
 
-    $select_user_profile = mysqli_query($connection, $query);
+    $query = "SELECT user_id, username, user_password, user_firstname, user_lastname, user_email, user_image, user_role ";
+    $query .= "FROM users WHERE username = ?";
 
-    while ($row = mysqli_fetch_assoc($select_user_profile)) {
+    $stmt = mysqli_prepare($connection, $query);
 
-      $user_id = $row['user_id'];
-      $username = $row['username'];
-      $user_password = $row['user_password'];
-      $user_firstname = $row['user_firstname'];
-      $user_lastname = $row['user_lastname'];
-      $user_email = $row['user_email'];
-      $user_image = $row['user_image'];
-      $user_role = $row['user_role'];
+    mysqli_stmt_bind_param($stmt, "s", $username);
 
-    }
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $user_id, $username, $user_password, $user_firstname, $user_lastname, $user_email, $user_image, $user_role);
+
+    mysqli_stmt_store_result($stmt);
+
+    mysqli_stmt_fetch($stmt);
+
   }
-
-?>
+ ?>
 
 <?php
 
@@ -38,7 +39,7 @@
     $user_image_temp = $_FILES['user_image']['tmp_name'];
     $user_role = escape($_POST['user_role']);
 
-    move_uploaded_file($user_image_temp, "../images/$user_image");
+    move_uploaded_file($user_image_temp, "../images/user/$user_image");
 
     if (empty($user_image)) {
       $query = "SELECT * FROM users WHERE user_id = {$user_id_to_edit}";
