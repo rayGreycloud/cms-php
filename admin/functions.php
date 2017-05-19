@@ -93,11 +93,30 @@ function selectCategoryToEdit() {
 function allRecordsCount($table) {
   global $connection;
 
-  $query = "SELECT * FROM " . $table;
-  $select_all_records = mysqli_query($connection, $query);
-  confirmQuery($select_all_records);
+  switch($table) {
+    case 'posts':
+    $query = "SELECT * FROM posts ";
+    break;
+    case 'comments':
+  $query = "SELECT * FROM comments ";
+    break;
+    case 'users':
+  $query = "SELECT * FROM users ";
+    break;
+    case 'categories':
+  $query = "SELECT * FROM categories ";
+    break;
+  }
 
-  return mysqli_num_rows($select_all_records);
+  $stmt = mysqli_prepare($connection, $query);
+
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_store_result($stmt);
+
+  mysqli_stmt_fetch($stmt);
+
+  return mysqli_stmt_num_rows($stmt);
 }
 
 function activityRecordsCount($table, $field, $value) {
