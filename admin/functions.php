@@ -69,9 +69,13 @@ function deleteCategory() {
   if (isset($_GET['delete'])) {
     $cat_id_to_delete = escape($_GET['delete']);
 
-    $query = "DELETE FROM categories WHERE cat_id = {$cat_id_to_delete} ";
-    $delete_category_query = mysqli_query($connection, $query);
-    confirmQuery($delete_category_query);
+    $query = "DELETE FROM categories WHERE cat_id = ? ";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "i", $cat_id_to_delete);
+    mysqli_stmt_execute($stmt);
+
+    // $delete_category_query = mysqli_query($connection, $query);
+    // confirmQuery($delete_category_query);
 
     header("Location: categories.php");
   }
