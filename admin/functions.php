@@ -39,13 +39,19 @@ function insert_categories() {
 function findAllCategories() {
   global $connection;
 
-  $query = "SELECT * FROM categories";
-  $select_categories = mysqli_query($connection, $query);
-  confirmQuery($select_categories);
+  $query = "SELECT cat_id, cat_title FROM categories ";
 
-  while($row = mysqli_fetch_assoc($select_categories)) {
-    $cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
+  $stmt = mysqli_prepare($connection, $query);
+
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $cat_id, $cat_title);
+
+  mysqli_stmt_store_result($stmt);
+
+  mysqli_stmt_fetch($stmt);
+
+  while(mysqli_stmt_fetch($stmt)):
 
     echo "<tr>";
     echo "<td>{$cat_id}</td>";
@@ -53,7 +59,8 @@ function findAllCategories() {
     echo "<td><a href='categories.php?edit={$cat_id}'>Edit</a></td>";
     echo "<td><a href='javascript:void(0)' data-cat-id='{$cat_id}' class='delete-cat__link'>Delete</a></td>";
     echo "</tr>";
-  }
+
+  endwhile;
 }
 
 function deleteCategory() {
