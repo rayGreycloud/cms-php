@@ -6,8 +6,6 @@
 
     $username = $_SESSION['username'];
 
-    $query = "SELECT * FROM users WHERE username = '{$username}' ";
-
     $query = "SELECT user_id, username, user_password, user_firstname, user_lastname, user_email, user_image, user_role ";
     $query .= "FROM users WHERE username = ?";
 
