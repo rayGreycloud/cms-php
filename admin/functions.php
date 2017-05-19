@@ -26,12 +26,14 @@ function insert_categories() {
     if ($cat_title == "" || empty($cat_title)) {
       echo "This field is required!";
     } else {
-      $query = "INSERT INTO categories(cat_title) ";
-      $query .="VALUE('{$cat_title}') ";
+      $query = "INSERT INTO categories(cat_title) VALUES (?) ";
 
-      $create_category_query = mysqli_query($connection, $query);
+      $stmt = mysqli_prepare($connection, $query);
 
-      confirmQuery($create_category_query);
+      mysqli_stmt_bind_param($stmt, 's', $cat_title);
+
+      mysqli_stmt_execute($stmt);
+
     }
   }
 }
