@@ -95,17 +95,17 @@ function allRecordsCount($table) {
 
   switch($table) {
     case 'posts':
-    $query = "SELECT * FROM posts ";
-    break;
+      $query = "SELECT * FROM posts ";
+      break;
     case 'comments':
-  $query = "SELECT * FROM comments ";
-    break;
+      $query = "SELECT * FROM comments ";
+      break;
     case 'users':
-  $query = "SELECT * FROM users ";
-    break;
+      $query = "SELECT * FROM users ";
+      break;
     case 'categories':
-  $query = "SELECT * FROM categories ";
-    break;
+      $query = "SELECT * FROM categories ";
+      break;
   }
 
   $stmt = mysqli_prepare($connection, $query);
@@ -119,15 +119,33 @@ function allRecordsCount($table) {
   return mysqli_stmt_num_rows($stmt);
 }
 
-function activityRecordsCount($table, $field, $value) {
+function activityRecordsCount($table, $value) {
   global $connection;
 
-  $query = "SELECT * FROM " . $table . " WHERE " . $field . " = '" . $value . "'";
+  switch($table) {
 
-  $activity_records = mysqli_query($connection, $query);
-  confirmQuery($activity_records);
+    case 'posts':
+      $query = "SELECT * FROM posts WHERE post_status = ? ";
+      break;
+    case 'comments':
+      $query = "SELECT * FROM comments WHERE comment_status = ? ";
+      break;
+    case 'users':
+      $query = "SELECT * FROM users WHERE user_role = ? ";
+      break;
+  }
 
-  return mysqli_num_rows($activity_records);
+  $stmt = mysqli_prepare($connection, $query);
+
+  mysqli_stmt_bind_param($stmt, "s", $value);
+
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_store_result($stmt);
+
+  mysqli_stmt_fetch($stmt);
+
+  return mysqli_stmt_num_rows($stmt);
 }
 
  ?>

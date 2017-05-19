@@ -167,17 +167,17 @@ $users_online_count = mysqli_num_rows($users_online_query);
 
 <?php
 
-  $draft_post_count = activityRecordsCount('posts', 'post_status', 'draft');
+  $draft_post_count = activityRecordsCount('posts', 'draft');
 
-  $published_post_count = activityRecordsCount('posts', 'post_status', 'published');
+  $published_post_count = activityRecordsCount('posts', 'published');
 
-  $approved_comment_count = activityRecordsCount('comments', 'comment_status', 'approved');
+  $approved_comment_count = activityRecordsCount('comments', 'approved');
 
-  $pending_comment_count = activityRecordsCount('comments', 'comment_status', 'pending');
+  $pending_comment_count = activityRecordsCount('comments', 'pending');
 
-  $admin_count = activityRecordsCount('users', 'user_role', 'admin');
+  $admin_count = activityRecordsCount('users', 'admin');
 
-  $subscriber_count = activityRecordsCount('users', 'user_role', 'subscriber');
+  $subscriber_count = activityRecordsCount('users', 'subscriber');
 
 ?>
 
