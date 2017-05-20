@@ -61,6 +61,7 @@ if(isset($_POST['submit'])) {
 
 <?php
     endwhile;
+    mysqli_stmt_close($stmt);
   }
 }
  ?>

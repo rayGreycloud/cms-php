@@ -61,6 +61,7 @@ if (mysqli_stmt_num_rows($stmt) == 0) {
 
 <?php
     endwhile;
+    mysqli_stmt_close($stmt);    
 }
  ?>
 

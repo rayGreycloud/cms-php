@@ -81,6 +81,7 @@ if (isset($_GET['category'])) {
 
 <?php
     endwhile;
+    mysqli_stmt_close($stmt);
 }
  ?>
 

@@ -62,6 +62,7 @@
 
 <?php
     endwhile;
+    mysqli_stmt_close($stmt);
 }
  ?>
 
@@ -103,6 +104,7 @@ while(mysqli_stmt_fetch($stmt)):
 
 <?php
     endwhile;
+    mysqli_stmt_close($stmt);    
 
  ?>
         <!-- Pager -->
