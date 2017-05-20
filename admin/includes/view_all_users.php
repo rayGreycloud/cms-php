@@ -17,17 +17,15 @@
               <tbody>
 <?php
 
-  $query = "SELECT * FROM users";
-  $select_users = mysqli_query($connection, $query);
+  $query = "SELECT user_id, username, user_firstname, user_lastname, user_email, user_image, user_role FROM users";
 
-  while($row = mysqli_fetch_assoc($select_users)) {
-    $user_id = $row['user_id'];
-    $username = $row['username'];
-    $user_firstname = $row['user_firstname'];
-    $user_lastname = $row['user_lastname'];
-    $user_email = $row['user_email'];
-    $user_image = $row['user_image'];
-    $user_role = $row['user_role'];
+  $stmt = mysqli_prepare($connection, $query);
+
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt, $user_id, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role);
+  mysqli_stmt_store_result($stmt);
+
+  while(mysqli_stmt_fetch($stmt)):
 
     if (empty($user_firstname)) {
       $user_firstname = 'n/a';
@@ -53,9 +51,9 @@
     echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link'>Delete</a></td>";
     echo "<tr>";
 
-  }
-?>
-
+    endwhile;
+    mysqli_stmt_close($stmt);
+ ?>
               </tbody>
             </table>
 
@@ -69,9 +67,11 @@ if (isset($_GET['delete'])) {
 
       $user_id_to_delete = escape($_GET['delete']);
 
-      $query = "DELETE FROM users WHERE user_id = {$user_id_to_delete} ";
-      $delete_user_query = mysqli_query($connection, $query);
-
+      $query = "DELETE FROM users WHERE user_id=? ";
+      $stmt = mysqli_prepare($connection, $query);
+      mysqli_stmt_bind_param($stmt, "i", $user_id_to_delete);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_close($stmt);
       header("Location: users.php");
 
     }
