@@ -25,8 +25,11 @@
   if (isset($_POST['update_category'])) {
     $cat_title_to_update = escape($_POST['cat_title']);
 
-    $query = "UPDATE categories SET cat_title = '{$cat_title_to_update}' WHERE cat_id = {$cat_id_to_update} ";
-    $update_category_query = mysqli_query($connection, $query);
+    $query = "UPDATE categories SET cat_title = ? WHERE cat_id = ?";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "si", $cat_title_to_update, $cat_id_to_update);
+    mysqli_stmt_execute($stmt);
+
   }
 ?>
 
