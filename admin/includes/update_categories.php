@@ -30,6 +30,7 @@
     mysqli_stmt_bind_param($stmt, "si", $cat_title_to_update, $cat_id_to_update);
     mysqli_stmt_execute($stmt);
 
+    header("Location: categories.php");
   }
 ?>
 
