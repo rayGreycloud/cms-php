@@ -193,7 +193,7 @@ $users_online_count = mysqli_num_rows($users_online_query);
       ['Activity', 'Number'],
 
   <?php
-  $element_text = array('All Posts', 'Active Posts', 'Draft Posts', 'All Comments', 'Approved', 'Pending Comments', 'All Users', 'Admins', 'Subscribers', 'Categories');
+  $element_text = array('All Posts', 'Active Posts', 'Draft Posts', 'All Comments', 'Approved', 'Pending', 'All Users', 'Admins', 'Subscribers', 'Categories');
 
   $element_count = array($post_count, $published_post_count, $draft_post_count, $comment_count, $approved_comment_count, $pending_comment_count, $user_count, $admin_count, $subscriber_count, $category_count);
 
