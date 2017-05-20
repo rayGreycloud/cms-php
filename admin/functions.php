@@ -33,7 +33,7 @@ function insert_categories() {
       mysqli_stmt_bind_param($stmt, 's', $cat_title);
 
       mysqli_stmt_execute($stmt);
-
+      mysqli_stmt_close($stmt);
     }
   }
 }
@@ -61,6 +61,7 @@ function findAllCategories() {
     echo "</tr>";
 
   endwhile;
+  mysqli_stmt_close($stmt);
 }
 
 function deleteCategory() {
@@ -73,7 +74,7 @@ function deleteCategory() {
     $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt, "i", $cat_id_to_delete);
     mysqli_stmt_execute($stmt);
-
+    mysqli_stmt_close($stmt);
     // $delete_category_query = mysqli_query($connection, $query);
     // confirmQuery($delete_category_query);
 

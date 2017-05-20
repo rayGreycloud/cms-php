@@ -20,7 +20,7 @@
     mysqli_stmt_store_result($stmt);
 
     mysqli_stmt_fetch($stmt);
-
+    mysqli_stmt_close($stmt);
   }
  ?>
 
