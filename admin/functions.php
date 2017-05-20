@@ -75,8 +75,6 @@ function deleteCategory() {
     mysqli_stmt_bind_param($stmt, "i", $cat_id_to_delete);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    // $delete_category_query = mysqli_query($connection, $query);
-    // confirmQuery($delete_category_query);
 
     header("Location: categories.php");
   }
@@ -117,7 +115,11 @@ function allRecordsCount($table) {
 
   mysqli_stmt_fetch($stmt);
 
-  return mysqli_stmt_num_rows($stmt);
+  $count = mysqli_stmt_num_rows($stmt);
+
+  mysqli_stmt_close($stmt);
+
+  return $count;
 }
 
 function activityRecordsCount($table, $value) {
@@ -146,7 +148,11 @@ function activityRecordsCount($table, $value) {
 
   mysqli_stmt_fetch($stmt);
 
-  return mysqli_stmt_num_rows($stmt);
+  $count = mysqli_stmt_num_rows($stmt);
+
+  mysqli_stmt_close($stmt);
+
+  return $count;
 }
 
  ?>
