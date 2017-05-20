@@ -39,28 +39,23 @@
 
     move_uploaded_file($user_image_temp, "../images/user/$user_image");
 
-    if (empty($user_image)) {
-      $query = "SELECT * FROM users WHERE user_id = {$user_id_to_edit}";
-      $select_image = mysqli_query($connection, $query);
-
-      while($row = mysqli_fetch_array($select_image)) {
-        $user_image = $row['user_image'];
-      }
-    }
-
     $query = "UPDATE users SET ";
-    $query .= "username = '{$username}', ";
-    $query .= "user_password = '{$user_password }', ";
-    $query .= "user_firstname = '{$user_firstname }', ";
-    $query .= "user_lastname = '{$user_lastname }', ";
-    $query .= "user_email = '{$user_email }', ";
-    $query .= "user_image = '{$user_image}', ";
-    $query .= "user_role = '{$user_role}' ";
-    $query .= "WHERE user_id = {$user_id} ";
+    $query .= "username=?, ";
+    $query .= "user_password=?, ";
+    $query .= "user_firstname=?, ";
+    $query .= "user_lastname=?, ";
+    $query .= "user_email=?, ";
+    $query .= "user_image=?, ";
+    $query .= "user_role=? ";
+    $query .= "WHERE user_id=?";
 
-    $edit_user_query = mysqli_query($connection, $query);
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "sssssssd", $username, $user_password, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_id);
 
-    confirmQuery($edit_user_query);
+    mysqli_stmt_execute($stmt);
+    confirmQuery($stmt);
+
+    mysqli_stmt_close($stmt);
 
     header("Location: index.php");
   }
