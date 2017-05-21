@@ -155,4 +155,33 @@ function activityRecordsCount($table, $value) {
   return $count;
 }
 
+ /* instructor's non-functioning code for marginal feature
+ function usersOnlineCount() {
+   $session = session_id();
+   $time = time();
+   $time_out_in_seconds = 60;
+   $time_out = $time -$time_out_in_seconds;
+
+   $query = "SELECT * FROM users_online WHERE session = '$session'";
+   $get_users_query = mysqli_query($connection, $query);
+   $user_count = mysqli_num_rows($get_users_query);
+
+   if ($user_count == NULL) {
+     $query = "INSERT INTO users_online(session, session_time) ";
+     $query .= "VALUES ('$session', '$time')";
+     $user_session_query = mysqli_query($connection, $query);
+     confirmQuery($user_session_query);
+
+   } else {
+     $query = "UPDATE users_online SET session_time = '$time' WHERE session = '$session'";
+     $user_session_query = mysqli_query($connection, $query);
+     confirmQuery($user_session_query);
+   }
+
+   $query = "SELECT * FROM users_online WHERE session_time < '$time_out' ";
+   $users_online_query = mysqli_query($connection, $query);
+   confirmQuery($users_online_query);
+   $users_online_count = mysqli_num_rows($users_online_query);
+}
+ */
  ?>
