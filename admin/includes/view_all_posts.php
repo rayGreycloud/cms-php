@@ -10,43 +10,53 @@ if (isset($_POST['checkBoxArray'])) {
     switch($bulk_options) {
       case 'draft':
       case 'published':
-        $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$checkedPost_Id} ";
-        $update_to_post_status = mysqli_query($connection, $query);
-        confirmQuery($update_to_post_status);
+        $query = "UPDATE posts SET post_status=? WHERE post_id=?";
+
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "sd", $bulk_options, $checkedPost_Id);
+        mysqli_stmt_execute($stmt);
+        confirmQuery($stmt);
+        mysqli_stmt_close($stmt);
         break;
 
       case 'delete':
-        $query = "DELETE FROM posts WHERE post_id={$checkedPost_Id} ";
-        $delete_post_query = mysqli_query($connection, $query);
-        confirmQuery($delete_post_query);
+        $query = "DELETE FROM posts WHERE post_id=? ";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $checkedPost_Id);
+        mysqli_stmt_execute($stmt);
+        confirmQuery($stmt);
+        mysqli_stmt_close($stmt);
 
-        $query = "DELETE FROM comments WHERE comment_post_id = {$checkedPost_Id} ";
-        $delete_comments_query = mysqli_query($connection, $query);
-        confirmQuery($delete_comments_query);
+        $query = "DELETE FROM comments WHERE comment_post_id=? ";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $checkedPost_Id);
+        mysqli_stmt_execute($stmt);
+        confirmQuery($stmt);
+        mysqli_stmt_close($stmt);
+
         break;
 
       case 'clone':
-        $query = "SELECT * FROM posts WHERE post_id={$checkedPost_Id} ";
-        $post_to_clone_query = mysqli_query($connection, $query);
-        confirmQuery($post_to_clone_query);
-
-        while ($row = mysqli_fetch_array($post_to_clone_query)) {
-          $post_author = escape($row['post_author']);
-          $post_title = escape($row['post_title']);
-          $post_category_id = escape($row['post_category_id']);
-          $post_status = escape($row['post_status']);
-          $post_image = escape($row['post_image']);
-          $post_content = escape($row['post_content']);
-          $post_tags = escape($row['post_tags']);
-          $post_comment_count = 0;
-        }
 
         $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
-        $query .= "VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}') ";
+        $query .= "SELECT post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status ";
+        $query .= "FROM posts WHERE post_id = {$checkedPost_Id}";
+
         $clone_post_query = mysqli_query($connection, $query);
         confirmQuery($clone_post_query);
-        break;
 
+        $cloned_post_id = mysqli_insert_id($connection);
+
+        $query = "UPDATE posts SET ";
+        $query .= "post_date = now(), ";
+        $query .= "post_comment_count=0, ";
+        $query .= "post_status='draft' ";
+        $query .= "WHERE post_id = $cloned_post_id ";
+
+        $update_clone_query = mysqli_query($connection, $query);
+        confirmQuery($update_clone_query);
+
+        break;
     }
   }
 }
