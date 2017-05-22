@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="./index.php">Blog</a>
+        <a class="navbar-brand" href="./index">Blog</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,9 +52,9 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="admin">ADMIN</a></li>
-        <li class="<?php echo $register_class; ?>"><a href="registration.php">REGISTER</a></li>
-        <li class="<?php echo $contact_class; ?>"><a href="contact.php">CONTACT</a></li>
+        <li><a href="/admin">ADMIN</a></li>
+        <li class="<?php echo $register_class; ?>"><a href="/registration">REGISTER</a></li>
+        <li class="<?php echo $contact_class; ?>"><a href="/contact">CONTACT</a></li>
 
 <?php
   if (isset($_SESSION['user_role'])) {
