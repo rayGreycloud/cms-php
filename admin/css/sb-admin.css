@@ -230,3 +230,7 @@ ul.alert-dropdown {
 .bulkOption__group--pad-bot {
   padding-bottom: 5px;
 }
+
+.form--invisible {
+  visibility: hidden;
+}

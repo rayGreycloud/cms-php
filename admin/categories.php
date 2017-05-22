@@ -24,7 +24,7 @@ include "./includes/modal_delete.php";
 
 <?php insert_categories(); ?>
 
-              <form action="" method="post">
+              <form action="" method="post" class="add-category__form">
                 <div class="form-group">
                   <label for="cat-title">ADD A NEW CATEGORY</label>
                   <input class="form-control" type="text" name="cat_title" placeholder="category title">
