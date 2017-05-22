@@ -51,7 +51,7 @@ if (isset($_GET['p_id'])) {
         </p>
         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
         <hr>
-        <img class="img-responsive" src="./images/user/<?php echo $post_image ?>" alt="">
+        <img class="img-responsive" src="/cms/images/user/<?php echo $post_image ?>" alt="">
         <hr>
         <p><?php echo $post_content ?></p>
 
