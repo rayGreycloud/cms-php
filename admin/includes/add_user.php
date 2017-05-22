@@ -10,17 +10,26 @@
     $user_image_temp = $_FILES['user_image']['tmp_name'];
     $user_role = escape($_POST['user_role']);
 
-    move_uploaded_file($user_image_temp, "../images/$user_image");
+    move_uploaded_file($user_image_temp, "../images/user/$user_image");
 
     $hashed_pwd = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
 
     $query = "INSERT INTO users (username, user_password, user_firstname, user_lastname, user_email, user_image, user_role) ";
 
-    $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_image}', '{$user_role}') ";
+    $query .= "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($connection, $query);
 
-    $create_user_query = mysqli_query($connection, $query);
+    mysqli_stmt_bind_param($stmt, 'sssssss', $username, $hashed_pwd, $user_firstname, $user_lastname, $user_email, $user_image, $user_role);
 
-    confirmQuery($create_user_query);
+    mysqli_stmt_execute($stmt);
+    confirmQuery($stmt);
+    mysqli_stmt_close($stmt);
+
+    // $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '{$user_image}', '{$user_role}') ";
+    //
+    // $create_user_query = mysqli_query($connection, $query);
+    //
+    // confirmQuery($create_user_query);
 
     header("Location: users.php");
   }
