@@ -1,6 +1,9 @@
 <?php include("modal_delete.php"); ?>
 
             <table class="table table-bordered table-hover">
+              <div class="col-xs-4 bulkOption__group--pad-bot">
+                <a class="btn btn-primary" href="users.php?source=add_user">Add User</a>
+              </div>
               <thead>
                 <tr>
                   <th>Id</th>
