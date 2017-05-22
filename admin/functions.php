@@ -29,10 +29,9 @@ function insert_categories() {
       $query = "INSERT INTO categories(cat_title) VALUES (?) ";
 
       $stmt = mysqli_prepare($connection, $query);
-
       mysqli_stmt_bind_param($stmt, 's', $cat_title);
-
       mysqli_stmt_execute($stmt);
+      confirmQuery($stmt);
       mysqli_stmt_close($stmt);
     }
   }
