@@ -52,7 +52,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/admin">ADMIN</a></li>
+        <li><a href="/cms/admin">ADMIN</a></li>
         <li class="<?php echo $register_class; ?>"><a href="/registration">REGISTER</a></li>
         <li class="<?php echo $contact_class; ?>"><a href="/contact">CONTACT</a></li>
 
