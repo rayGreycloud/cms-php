@@ -37,7 +37,7 @@
   mysqli_stmt_store_result($stmt);
 
   if (mysqli_stmt_num_rows($stmt) == 0) {
-      echo "<h2 class='text-center'>No posts found.</h2>";
+      echo "<h2 class='text-center bg-primary'>No posts available by that author</h2>";
   } else {
     while(mysqli_stmt_fetch($stmt)):
 
@@ -104,7 +104,7 @@ while(mysqli_stmt_fetch($stmt)):
 
 <?php
     endwhile;
-    mysqli_stmt_close($stmt);    
+    mysqli_stmt_close($stmt);
 
  ?>
         <!-- Pager -->

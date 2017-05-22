@@ -56,7 +56,7 @@ if (isset($_GET['category'])) {
 
   if (mysqli_stmt_num_rows($stmt) == 0) {
 
-    echo "<h3 class='text-center'>No posts available in that category</h3>";
+    echo "<h3 class='text-center bg-primary'>No posts available in category</h3>";
   }
 
     while(mysqli_stmt_fetch($stmt)):

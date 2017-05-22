@@ -33,7 +33,7 @@ mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, 
 mysqli_stmt_store_result($stmt);
 
 if (mysqli_stmt_num_rows($stmt) == 0) {
-    echo "<h2 class='text-center'>No posts found.</h2>";
+    echo "<h2 class='text-center bg-primary'>No posts found.</h2>";
 } else {
   while(mysqli_stmt_fetch($stmt)):
 
@@ -61,7 +61,7 @@ if (mysqli_stmt_num_rows($stmt) == 0) {
 
 <?php
     endwhile;
-    mysqli_stmt_close($stmt);    
+    mysqli_stmt_close($stmt);
 }
  ?>
 

@@ -35,7 +35,7 @@ if(isset($_POST['submit'])) {
   mysqli_stmt_store_result($stmt);
 
   if (mysqli_stmt_num_rows($stmt) == 0) {
-      echo "<h2 class='text-center'>No posts found.</h2>";
+      echo "<h2 class='text-center bg-primary'>No posts found.</h2>";
   } else {
     while(mysqli_stmt_fetch($stmt)):
 
