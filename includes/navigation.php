@@ -45,7 +45,7 @@
 
     }
 
-    echo "<li class='$category_class'><a href='category.php?category={$cat_id}'>{$cat_title}</a></li>";
+    echo "<li class='$category_class'><a href='/cms/category/{$cat_id}'>{$cat_title}</a></li>";
   }
 
 ?>
@@ -53,15 +53,15 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/cms/admin">ADMIN</a></li>
-        <li class="<?php echo $register_class; ?>"><a href="/registration">REGISTER</a></li>
-        <li class="<?php echo $contact_class; ?>"><a href="/contact">CONTACT</a></li>
+        <li class="<?php echo $register_class; ?>"><a href="/cms/registration">REGISTER</a></li>
+        <li class="<?php echo $contact_class; ?>"><a href="/cms/contact">CONTACT</a></li>
 
 <?php
   if (isset($_SESSION['user_role'])) {
     if (isset($_GET['p_id'])) {
       $the_post_id = $_GET['p_id'];
 
-      echo "<li><a href='./admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+      echo "<li><a href='./cms/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
 
     }
   }
