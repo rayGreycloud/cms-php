@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 // Create array of connection parameters
 $db['db_host'] = "localhost";
 $db['db_user'] = "root";
