@@ -3,28 +3,11 @@
 <?php
 
   if (isset($_POST['submit'])) {
-
     $username = escape($_POST['username']);
     $password = escape($_POST['password']);
     $email = escape($_POST['email']);
+    $message = register_user($username, $email, $password);
 
-    if (username_exists($username)) {
-      $message = "That username is not available";
-    } else if (email_exists($email)) {
-      $message = "That email has already been used";
-    } else if (empty($username) || empty($email) || empty($password)) {
-      $message = "All fields are required";
-    } else {
-
-      $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-      $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
-      $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$email}', 'subscriber') ";
-      $register_user_query = mysqli_query($connection, $query);
-      confirmQuery($register_user_query);
-
-      $message = "Registration successful";
-    }
   } else {
     $message = "";
   }
