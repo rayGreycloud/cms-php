@@ -18,7 +18,7 @@
 
 <?php
 
-  $query = "SELECT * FROM categories LIMIT 4";
+  $query = "SELECT * FROM categories LIMIT 5";
   $select_all_categories_query = mysqli_query($connection, $query);
 
   while($row = mysqli_fetch_assoc($select_all_categories_query)) {
@@ -52,7 +52,12 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/cms/admin">ADMIN</a></li>
+<?php
+  if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+    echo "<li><a href='/cms/admin'>ADMIN</a></li>";
+  }
+
+ ?>
         <li class="<?php echo $register_class; ?>"><a href="/cms/registration">REGISTER</a></li>
         <li class="<?php echo $contact_class; ?>"><a href="/cms/contact">CONTACT</a></li>
 
