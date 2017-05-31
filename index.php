@@ -17,24 +17,40 @@
         </h1>
 
 <?php
-
-$query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
-$query .= "FROM posts WHERE post_status = ?";
-$published = 'published';
-
-$stmt = mysqli_prepare($connection, $query);
-
-mysqli_stmt_bind_param($stmt, "s", $published);
-
-mysqli_stmt_execute($stmt);
-
-mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
-
-mysqli_stmt_store_result($stmt);
-
-if (mysqli_stmt_num_rows($stmt) == 0) {
-    echo "<h2 class='text-center bg-primary'>No posts found.</h2>";
+if (isset($_GET['page'])) {
+  $page_requested = $_GET['page'];
 } else {
+  $page_requested = "";
+}
+
+if ($page_requested == "" || $page_requested == 1) {
+  $top_page = 0;
+} else {
+  $top_page = ($page_requested * 5) - 5;
+}
+
+// Get post count for pagination calculation
+$query = "SELECT * FROM posts WHERE post_status = 'published'";
+$posts_count_query = mysqli_query($connection, $query);
+confirmQuery($posts_count_query);
+$posts_count = mysqli_num_rows($posts_count_query);
+$page_count = ceil($posts_count / 5);
+
+if ($posts_count == 0) {
+  echo "<h2 class='text-center bg-primary'>No posts found.</h2>";
+} else {
+
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_status = ? ";
+  $query .= "LIMIT  ?, 5";
+  $published = 'published';
+
+  $stmt = mysqli_prepare($connection, $query);
+  mysqli_stmt_bind_param($stmt, "si", $published, $top_page);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+  mysqli_stmt_store_result($stmt);
+
   while(mysqli_stmt_fetch($stmt)):
 
   $post_content = substr($post_content,0,222);
@@ -60,19 +76,25 @@ if (mysqli_stmt_num_rows($stmt) == 0) {
         <hr>
 
 <?php
-    endwhile;
-    mysqli_stmt_close($stmt);
+  endwhile;
+  mysqli_stmt_close($stmt);
 }
  ?>
-
         <!-- Pager -->
-        <ul class="pager">
-          <li class="previous">
-            <a href="#">&larr; Older</a>
-          </li>
-          <li class="next">
-            <a href="#">Newer &rarr;</a>
-          </li>
+        <ul class="pagination">
+
+<?php
+  for ($i = 1; $i <= $page_count; $i++) {
+    $active_class = '';
+
+    if ($i == $page_requested) {
+      $active_class = 'active';
+    }
+
+    echo "<li class='{$active_class}'><a href='index.php?page={$i}'>{$i}</a></li>";
+  }
+ ?>
+
         </ul>
 
       </div> <!-- /.col-md-8 -->
