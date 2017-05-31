@@ -62,7 +62,7 @@ if (isset($_GET['category'])) {
   mysqli_stmt_store_result($stmt);
 
   while(mysqli_stmt_fetch($stmt)):
-
+  $post_content = substr($post_content,0,222);
 ?>
 
         <!-- Blog Post Template -->
