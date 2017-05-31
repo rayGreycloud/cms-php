@@ -5,12 +5,10 @@
 <?php session_start(); ?>
 
 <?php
-
-  if (!isset($_SESSION['user_role'])) {
-      header("Location: ../index.php ");
+  if (!is_admin($_SESSION['username'])) {
+    header("Location: index.php");
   }
-
-?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
