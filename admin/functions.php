@@ -154,7 +154,7 @@ function activityRecordsCount($table, $value) {
   return $count;
 }
 
-function is_admin($username = '') {
+function is_admin($username) {
   global $connection;
 
   $query = "SELECT user_role FROM users WHERE username = '$username'";
