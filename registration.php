@@ -8,6 +8,10 @@
     $password = escape($_POST['password']);
     $email = escape($_POST['email']);
 
+    if (username_exists($username)) {
+      $message = "That username is not available";
+    }
+
     if (!empty($username) && !empty($email) && !empty($password)) {
 
       $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
