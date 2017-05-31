@@ -31,7 +31,7 @@
   <link href="css/loader.css" rel="stylesheet">
 
   <!-- Custom Fonts -->
-  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
   <!-- Charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

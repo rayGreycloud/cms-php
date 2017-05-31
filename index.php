@@ -40,7 +40,7 @@ if ($posts_count == 0) {
   echo "<h2 class='text-center bg-primary'>No posts found.</h2>";
 } else {
 
-  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content, post_comment_count ";
   $query .= "FROM posts WHERE post_status = ? ";
   $query .= "LIMIT  ?, 5";
   $published = 'published';
@@ -48,7 +48,7 @@ if ($posts_count == 0) {
   $stmt = mysqli_prepare($connection, $query);
   mysqli_stmt_bind_param($stmt, "si", $published, $top_page);
   mysqli_stmt_execute($stmt);
-  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_comment_count);
   mysqli_stmt_store_result($stmt);
 
   while(mysqli_stmt_fetch($stmt)):
@@ -72,7 +72,7 @@ if ($posts_count == 0) {
         <hr>
         <p><?php echo $post_content; ?></p>
         <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
+        <div class="pull-right"><i class="fa fa-comments fa-2x"></i> <huge><?php echo $post_comment_count ?></huge></div>
         <hr>
 
 <?php
