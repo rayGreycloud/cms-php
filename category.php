@@ -11,47 +11,32 @@
 
       <!-- Blog Entries Column -->
       <div class="col-md-8">
-        <h1 class="page-header">
-          Posts
-          <small>Category: All</small>
-        </h1>
 
 <?php
 
 if (isset($_GET['category'])) {
   $post_category_id = escape($_GET['category']);
 
-  if ($_SESSION['user_role'] == 'admin') {
-    $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
-    $query .= "FROM posts WHERE post_category_id = ?";
-    $stmt1 = mysqli_prepare($connection, $query);
+  $query = "SELECT cat_id, cat_title FROM categories WHERE cat_id = $post_category_id";
+  $cat_title_query = mysqli_query($connection, $query);
+  confirmQuery($cat_title_query);
 
-  } else {
-    $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
-    $query .= "FROM posts WHERE post_category_id = ? AND post_status = ?";
-    $published = 'published';
-    $stmt2 = mysqli_prepare($connection, $query);
+  while ($row = mysqli_fetch_array($cat_title_query)) {
+    $cat_id = $row['cat_id'];
+    $cat_title = $row['cat_title'];
   }
 
-  if (isset($stmt1)) {
-    mysqli_stmt_bind_param($stmt1, "i", $post_category_id);
+  echo "<h1 class='page-header'>Posts <small>Category: {$cat_title}</small></h1>";
 
-    mysqli_stmt_execute($stmt1);
 
-    mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_category_id = ? AND post_status = ?";
+  $published = 'published';
+  $stmt = mysqli_prepare($connection, $query);
 
-    $stmt = $stmt1;
-
-  } else {
-    mysqli_stmt_bind_param($stmt2, "is", $post_category_id, $published);
-
-    mysqli_stmt_execute($stmt2);
-
-    mysqli_stmt_bind_result($stmt2, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
-
-    $stmt = $stmt2;
-  }
-
+  mysqli_stmt_bind_param($stmt, "is", $post_category_id, $published);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
   mysqli_stmt_store_result($stmt);
 
   if (mysqli_stmt_num_rows($stmt) == 0) {
@@ -59,7 +44,7 @@ if (isset($_GET['category'])) {
     echo "<h3 class='text-center bg-primary'>No posts available in category</h3>";
   }
 
-    while(mysqli_stmt_fetch($stmt)):
+  while(mysqli_stmt_fetch($stmt)):
 
 ?>
 
