@@ -10,9 +10,9 @@
 
     if (username_exists($username)) {
       $message = "That username is not available";
-    }
-
-    if (!empty($username) && !empty($email) && !empty($password)) {
+    } else if (empty($username) || empty($email) || empty($password)) {
+      $message = "All fields are required";
+    } else {
 
       $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
@@ -22,8 +22,6 @@
       confirmQuery($register_user_query);
 
       $message = "Registration successful";
-    } else {
-      $message = "All fields are required";
     }
   } else {
     $message = "";
