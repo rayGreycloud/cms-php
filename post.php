@@ -116,13 +116,14 @@ if (isset($_POST['create_comment'])) {
 
     $query .= "VALUES ('{$comment_post_id}', '{$comment_author}', '{$comment_email}', '${comment_status}', '{$comment_content}', now()) ";
     $create_comment_query = mysqli_query($connection, $query);
-
     confirmQuery($create_comment_query);
-/*    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+
+    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
     $query .= "WHERE post_id = $comment_post_id ";
     $increment_comment_count_query = mysqli_query($connection, $query);
     confirmQuery($increment_comment_count_query);
-*/
+
+    header("Location: /post.php?p_id=$comment_post_id");
   } else {
     echo "<script>alert('All fields are required')</script>";
   }
