@@ -10,6 +10,8 @@
 
     if (username_exists($username)) {
       $message = "That username is not available";
+    } else if (email_exists($email)) {
+      $message = "That email has already been used";
     } else if (empty($username) || empty($email) || empty($password)) {
       $message = "All fields are required";
     } else {
