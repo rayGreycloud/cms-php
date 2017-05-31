@@ -11,46 +11,58 @@
 
       <!-- Blog Entries Column -->
       <div class="col-md-8">
-        <h1 class="page-header">
-          Posts
-          <small>Category: All</small>
-        </h1>
 
 <?php
 
-  if (isset($_GET['p_id'])) {
-    $selected_post_id = escape($_GET['p_id']);
-    $selected_author = escape($_GET['author']);
+if (isset($_GET['author'])) {
+  $selected_author = escape($_GET['author']);
+
+  echo "<h1 class='page-header'>Posts <small>Author: {$selected_author}</small></h1>";
+
+  if (isset($_GET['page'])) {
+    $page_requested = $_GET['page'];
+  } else {
+    $page_requested = "";
   }
 
-  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
-  $query .= "FROM posts WHERE post_author = ?";
+  if ($page_requested == "" || $page_requested == 1) {
+    $top_page = 0;
+  } else {
+    $top_page = ($page_requested * 5) - 5;
+  }
+  // Get post count for pagination calculation
+  $query = "SELECT * FROM posts WHERE post_author = '$selected_author' AND post_status = 'published' ";
+  $posts_count_query = mysqli_query($connection, $query);
+  confirmQuery($posts_count_query);
+  $posts_count = mysqli_num_rows($posts_count_query);
+  $page_count = ceil($posts_count / 5);
 
+  if ($posts_count == 0) {
+    echo "<h3 class='text-center bg-primary'>No posts found.</h3>";
+  } else {
+
+  $query = "SELECT post_id, post_title, post_author, post_date, post_image, post_content ";
+  $query .= "FROM posts WHERE post_author = ? AND post_status = ? ";
+  $query .= "LIMIT ?, 5";
+  $published = 'published';
   $stmt = mysqli_prepare($connection, $query);
 
-  mysqli_stmt_bind_param($stmt, "s", $selected_author);
-
+  mysqli_stmt_bind_param($stmt, "ssi", $selected_author, $published, $top_page);
   mysqli_stmt_execute($stmt);
-
+  confirmQuery($stmt);
   mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
-
   mysqli_stmt_store_result($stmt);
 
-  if (mysqli_stmt_num_rows($stmt) == 0) {
-      echo "<h2 class='text-center bg-primary'>No posts available by that author</h2>";
-  } else {
-    while(mysqli_stmt_fetch($stmt)):
-
-    $post_content = substr($post_content,0,222);
-
-?>
+  while(mysqli_stmt_fetch($stmt)):
+  $post_content = substr($post_content,0,222);
+  ?>
 
         <!-- Blog Post Template -->
         <h2>
           <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
         </h2>
         <p class="lead">
-          by <a href="index.php"><?php echo $post_author ?></a>
+          by <a href="#"><?php echo $post_author ?></a>
         </p>
         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
         <hr>
@@ -63,61 +75,28 @@
 <?php
     endwhile;
     mysqli_stmt_close($stmt);
+  }
 }
  ?>
 
-<!-- Posted Comments -->
+ <!-- Pager -->
+ <ul class="pagination">
+
 <?php
-$comment_post_id = escape($_GET['p_id']);
+  for ($i = 1; $i <= $page_count; $i++) {
+    $active_class = '';
 
-$query = "SELECT comment_date, comment_content, comment_author, "
-$query .= "comment_post_id FROM comments WHERE comment_post_id = ? ";
-$query .= "AND comment_status = ? ORDER BY comment_id DESC ";
-$approved = 'approved';
+    if ($i == $page_requested) {
+    $active_class = 'active';
+    }
 
-$stmt = mysqli_prepare($connection, $query);
-
-mysqli_stmt_bind_param($stmt, "i", $comment_post_id);
-
-mysqli_stmt_execute($stmt);
-
-mysqli_stmt_bind_result($stmt, $comment_date, $comment_content, $comment_author, $comment_post_id);
-
-mysqli_stmt_store_result($stmt);
-
-while(mysqli_stmt_fetch($stmt)):
+    echo "<li class='{$active_class}'><a href='author_posts.php?author={$selected_author}&page={$i}'>{$i}</a></li>";
+  }
 ?>
 
-<!-- Comment -->
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" src="http://placehold.it/64x64" alt="">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <?php echo $comment_author; ?>
-      <small><?php echo $comment_date; ?></small>
-    </h4>
-    <?php echo $comment_content; ?>
-  </div>
-</div>
+ </ul>
 
-<?php
-    endwhile;
-    mysqli_stmt_close($stmt);
-
- ?>
-        <!-- Pager -->
-        <ul class="pager">
-            <li class="previous">
-                <a href="#">&larr; Older</a>
-            </li>
-            <li class="next">
-                <a href="#">Newer &rarr;</a>
-            </li>
-        </ul>
-
-      </div>
+      </div> <!-- /.col-md-8 -->
 
       <!-- Blog Sidebar Widgets Column -->
 <?php include "./includes/sidebar.php"; ?>
