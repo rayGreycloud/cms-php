@@ -36,8 +36,8 @@ if(isset($_POST['submit'])) {
   confirmQuery($posts_count_query);
   $posts_count = mysqli_num_rows($posts_count_query);
   $page_count = ceil($posts_count / 5);
-  echo "posts: " . $posts_count;
-  echo "pages: " . $page_count;
+  // echo "posts: " . $posts_count;
+  // echo "pages: " . $page_count;
 
   if ($posts_count == 0) {
     echo "<h3 class='text-center bg-primary'>No posts found.</h3>";
@@ -78,7 +78,7 @@ if(isset($_POST['submit'])) {
 
 <?php
     endwhile;
-    // mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt);
   }
 }
  ?>
@@ -93,8 +93,17 @@ if(isset($_POST['submit'])) {
     if ($i == $page_requested) {
     $active_class = 'active';
     }
+    // ISSUE: pagination not working because search is post request
+    // Not cached and not url based
+    // page_count becomes undefined
 
+    // None of the below work:
+     
     echo "<li class='{$active_class}'><a href='search.php?search={$search}%&page={$i}'>{$i}</a></li>";
+
+    // echo "<li class='page-item {$active_class}'><form action='search.php' method='post'><input class='page-link' type='submit' value='{$i}' /i></form></li>";
+
+    // echo "<li class='{$active_class}'><a href='search.php?page={$i}'>{$i}</a></li>";
   }
 ?>
 
