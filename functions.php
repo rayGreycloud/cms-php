@@ -48,12 +48,14 @@ function already_exists($field, $value) {
 function register_user($username, $email, $password) {
   global $connection;
 
-  if (already_exists('username', $username)) {
+  if (empty($username) || empty($email) || empty($password)) {
+    $message = "All fields are required";
+  } else if (already_exists('username', $username)) {
     $message = "That username is not available";
+  } else if (strlen($username) < 4) {
+    $message = "Username must be at least 4 characters";
   } else if (already_exists('user_email', $email)) {
     $message = "That email has already been used";
-  } else if (empty($username) || empty($email) || empty($password)) {
-    $message = "All fields are required";
   } else {
 
     $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
