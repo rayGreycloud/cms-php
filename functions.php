@@ -17,10 +17,10 @@ function escape($string) {
 }
 
 
-function username_exists($username) {
+function already_exists($field, $value) {
   global $connection;
 
-  $query = "SELECT username FROM users WHERE username = '$username'";
+  $query = "SELECT $field FROM users WHERE $field = '$value'";
   $result = mysqli_query($connection, $query);
   confirmQuery($result);
 
@@ -31,26 +31,26 @@ function username_exists($username) {
   }
 }
 
-function email_exists($email) {
-  global $connection;
-
-  $query = "SELECT user_email FROM users WHERE user_email = '$email'";
-  $result = mysqli_query($connection, $query);
-  confirmQuery($result);
-
-  if (mysqli_num_rows($result) == 0) {
-    return false;
-  } else {
-    return true;
-  }
-}
+// function email_exists($email) {
+//   global $connection;
+//
+//   $query = "SELECT user_email FROM users WHERE user_email = '$email'";
+//   $result = mysqli_query($connection, $query);
+//   confirmQuery($result);
+//
+//   if (mysqli_num_rows($result) == 0) {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// }
 
 function register_user($username, $email, $password) {
   global $connection;
 
-  if (username_exists($username)) {
+  if (already_exists('username', $username)) {
     $message = "That username is not available";
-  } else if (email_exists($email)) {
+  } else if (already_exists('user_email', $email)) {
     $message = "That email has already been used";
   } else if (empty($username) || empty($email) || empty($password)) {
     $message = "All fields are required";
