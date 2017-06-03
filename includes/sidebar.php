@@ -25,10 +25,9 @@
       <h4><strong><?php echo $_SESSION['username']; ?></strong></h4>
       <a href="./includes/logout.php" class="btn btn-primary">Logout</a>
 <?php else: ?>
-      <a href="./signin.php" class="btn btn-primary">Sign in</a>
-    <div class="col-lg-12 text-center">
-      <a href="./registration.php">Register Here</a>
-    </div>
+      <a href="./signin.php" class="btn btn-primary btn-md btn-block">Sign in</a>
+      <a class="btn btn-info btn-block" href="./registration.php">Register</a>
+
 <?php endif; ?>
 
   </div>
