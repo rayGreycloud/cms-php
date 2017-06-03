@@ -1,5 +1,7 @@
-<?php  include "includes/db.php"; ?>
-<?php  include "includes/header.php"; ?>
+<?php include "includes/db.php"; ?>
+<?php include "includes/header.php"; ?>
+<?php include "includes/functions_user.php"; ?>
+
 <?php
   $message = '';
 
@@ -8,7 +10,8 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    login_user($username, $password);
+    authenticate_user($username, $password);
+
   }
  ?>
 
