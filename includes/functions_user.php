@@ -36,7 +36,8 @@
 
       header("Location: ../admin/index.php ");
     } else {
-      header("Location: ../index.php ");
+      $message = "Error - username and/or password are incorrect";
+      return $message;
     }
   }
 
