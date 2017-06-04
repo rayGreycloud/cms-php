@@ -10,8 +10,19 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    authenticate_user($username, $password);
+    $user_auth = authenticate_user($username, $password);
 
+    if ($user_auth != '') {
+
+      $_SESSION['username'] = $username;
+      $_SESSION['user_role'] = $user_auth;
+
+      session_write_close();
+
+      header("Location: ./admin/index.php ");
+    } else {
+      $message = "Error - username and/or password are incorrect";
+    }
   }
  ?>
 
@@ -27,17 +38,17 @@
         <div class="col-xs-6 col-xs-offset-3">
           <div class="form-wrap">
             <h1>Login</h1>
-            <form action="/signin.php" method="post">
+            <form action="/cms/signin.php" method="post">
               <h3 class="text-center text-danger"><?php echo $message; ?></h3>
               <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Enter Username">
               </div>
-              <div class="input-group">
+              <div class="form-group">
                 <input name="password" type="password" class="form-control" placeholder="Enter Password">
-                <span class="input-group-btn">
-                  <button name="login" class="btn btn-primary" type="submit">Login</button>
-                </span>
               </div>
+
+              <button name="login" class="btn btn-primary btn-block" type="submit">Login</button>
+
             </form>
             <div class="col-lg-12 text-center text-info">
               <a href="./registration.php">Register Here</a>
