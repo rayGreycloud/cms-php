@@ -21,6 +21,10 @@
 
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
+
+    if (!$user_image) {
+      $user_image = 'placeholder-user.png';
+    }
   }
  ?>
 
