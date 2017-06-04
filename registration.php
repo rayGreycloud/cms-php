@@ -8,6 +8,15 @@
     $email = escape($_POST['email']);
     $message = register_user($username, $email, $password);
 
+    if ($message == 'success') {
+
+      $_SESSION['username'] = $username;
+      $_SESSION['user_role'] = 'admin';
+
+      session_write_close();
+
+      header("Location: ./admin/index.php ");
+    }
   } else {
     $message = "";
   }
