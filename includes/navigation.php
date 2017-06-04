@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -53,6 +52,7 @@
 
       <ul class="nav navbar-nav navbar-right">
 <?php
+
   if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo "<li><a href='/cms/admin'>ADMIN</a></li>";
   }
