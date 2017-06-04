@@ -61,11 +61,11 @@ function register_user($username, $email, $password) {
     $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
     $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
-    $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$email}', 'subscriber') ";
+    $query .= "VALUES ('{$username}', '{$hashed_pwd}', '{$email}', 'admin') ";
     $register_user_query = mysqli_query($connection, $query);
     confirmQuery($register_user_query);
 
-    $message = "Registration successful";
+    $message = "success";
   }
   return $message;
 }
