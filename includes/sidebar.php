@@ -2,7 +2,7 @@
 
   <!-- Blog Search Well -->
   <div class="well">
-      <h4>Blog Search</h4>
+      <h4 class="text-center">Blog Search</h4>
       <form action="search.php" method="post">
         <div class="input-group">
           <input name="search" type="text" class="form-control">
@@ -25,13 +25,13 @@
       <h4><strong><?php echo $_SESSION['username']; ?></strong></h4>
       <a href="./includes/logout.php" class="btn btn-primary">Logout</a>
 <?php else: ?>
-      <a href="./signin.php" class="btn btn-primary btn-md btn-block">Sign in</a>
-      <a class="btn btn-info btn-block" href="./registration.php">Register</a>
+      <h4 class="text-center">
+        <a href="./signin.php" class="">Sign in</a> or <a class="" href="./registration.php">Sign up</a>
+      </h4>
 
 <?php endif; ?>
 
   </div>
-
   <!-- Blog Categories Well -->
   <div class="well">
 
@@ -42,7 +42,7 @@ $select_categories_sidebar = mysqli_query($connection, $query);
 
 ?>
 
-    <h4>Blog Categories</h4>
+    <h4 class="text-center">Categories</h4>
     <div class="row">
       <div class="col-lg-12">
         <ul class="list-unstyled">
@@ -53,7 +53,7 @@ while($row = mysqli_fetch_assoc($select_categories_sidebar)) {
   $cat_title = $row['cat_title'];
   $cat_id = $row['cat_id'];
 
-  echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+  echo "<li class='text-center'><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
 }
 
 ?>
