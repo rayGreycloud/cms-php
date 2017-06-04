@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
           <div class="form-wrap">
-            <h1>Login</h1>
+            <h1>Sign in</h1>
             <form action="/cms/signin.php" method="post">
               <h3 class="text-center text-danger"><?php echo $message; ?></h3>
               <div class="form-group">
@@ -47,11 +47,11 @@
                 <input name="password" type="password" class="form-control" placeholder="Enter Password">
               </div>
 
-              <button name="login" class="btn btn-primary btn-block" type="submit">Login</button>
+              <button name="login" class="btn btn-custom btn-lg btn-block" type="submit">Sign in</button>
 
             </form>
-            <div class="col-lg-12 text-center text-info">
-              <a href="./registration.php">Register Here</a>
+            <div class="col-lg-12 text-center text-muted">
+              <a href="./registration.php"><h5>Need an account?  Register here</h5></a>
             </div>
 
 
