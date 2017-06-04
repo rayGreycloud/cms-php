@@ -55,6 +55,8 @@
 
   if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo "<li><a href='/cms/admin'>ADMIN</a></li>";
+  } else {
+    echo "<li><a href='./signin.php'>SIGN IN</a></li>";
   }
 
  ?>
