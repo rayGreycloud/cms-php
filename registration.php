@@ -39,11 +39,11 @@
               <h6 class="text-center"><?php echo $message; ?></h6>
               <div class="form-group">
                 <label for="username" class="sr-only">username</label>
-                <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username" autocomplete="on" value="<?php echo isset($username) ? $username : ''; ?>">
               </div>
                <div class="form-group">
                 <label for="email" class="sr-only">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" autocomplete="on" value="<?php echo isset($email) ? $email : ''; ?>">
               </div>
                <div class="form-group">
                 <label for="password" class="sr-only">Password</label>
