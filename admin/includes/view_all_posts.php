@@ -91,7 +91,7 @@ if (isset($_POST['checkBoxArray'])) {
                   <th>Image</th>
                   <th>Tags</th>
                   <th>Views</th>
-                  <th><sm>Comments</sm></th>
+                  <th><sm>Cmnts</sm></th>
                   <th>Date</th>
                   <th class="text-center">View</th>
                   <th class="text-center">Edit</th>
@@ -116,7 +116,7 @@ if (isset($_POST['checkBoxArray'])) {
   while($row = mysqli_fetch_assoc($select_posts)) {
     $post_id = $row['post_id'];
     $post_author = $row['post_author'];
-    $post_title = $row['post_title'];
+    $post_title = substr($row['post_title'],0,27);
     $post_category_id = $row['post_category_id'];
     $post_status = $row['post_status'];
     $post_image = $row['post_image'];
