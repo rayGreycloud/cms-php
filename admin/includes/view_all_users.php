@@ -13,8 +13,8 @@
                   <th>Email</th>
                   <th>Image</th>
                   <th>Role</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,8 +50,9 @@
 
     echo "<td><img width='50rem' src='../images/user/$user_image'></td>";
     echo "<td>" . ucfirst($user_role) . "</td>";
-    echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
-    echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link'>Delete</a></td>";
+    echo "<td><a class='btn btn-info' href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
+
+    echo "<td><a href='javascript:void(0)' data-user-id='{$user_id}' class='delete-user__link btn btn-danger'>Delete</a></td>";
     echo "<tr>";
 
     endwhile;
