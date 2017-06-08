@@ -3,7 +3,7 @@
 <?php
 
 
-  if (isset($_POST['submit'])) {
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = escape($_POST['username']);
     $password = escape($_POST['password']);
     $email = escape($_POST['email']);
