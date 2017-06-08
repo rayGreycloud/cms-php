@@ -34,16 +34,27 @@ function already_exists($field, $value) {
 function register_user($username, $email, $password) {
   global $connection;
 
-  if (empty($username) || empty($email) || empty($password)) {
-    $message = "All fields are required";
-  } else if (already_exists('username', $username)) {
-    $message = "That username is not available";
-  } else if (strlen($username) < 4) {
-    $message = "Username must be at least 4 characters";
-  } else if (already_exists('user_email', $email)) {
-    $message = "That email has already been used";
-  } else {
+  $error = [
+    'registered'=> FALSE,
+    'username'=> '',
+    'email'=> '',
+    'password'=> ''
+  ];
 
+  if (empty($username)) {
+    $error['username'] = "Username cannot be empty";
+  } else if (strlen($username) < 4) {
+    $error['username'] = "Username must be at least 4 characters";
+  } else if (already_exists('username', $username)) {
+    $error['username'] = "That username is not available";
+  } else if (empty($email)) {
+    $error['email'] = "Email cannot be empty";
+  } else if (already_exists('user_email', $email)){
+    $error['email'] = "That email has already been used";
+  } else if (empty($password)) {
+    $error['password'] = "Please choose a password";
+  } else {
+    // All is good, register user
     $hashed_pwd = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
     $query = "INSERT INTO users (username, user_password, user_email, user_role) ";
@@ -51,8 +62,10 @@ function register_user($username, $email, $password) {
     $register_user_query = mysqli_query($connection, $query);
     confirmQuery($register_user_query);
 
-    $message = "success";
+    $error['registered'] = TRUE;
+
   }
-  return $message;
+  // If values still empty, registration successful
+  return $error;
 }
 ?>
