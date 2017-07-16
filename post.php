@@ -61,7 +61,7 @@ if (isset($_GET['p_id'])) {
   }
 
 } else {
-  header("Location: index.php");
+  redirect("index.php");
 }
  ?>
 
@@ -123,7 +123,7 @@ if (isset($_POST['create_comment'])) {
     $increment_comment_count_query = mysqli_query($connection, $query);
     confirmQuery($increment_comment_count_query);
 
-    header("Location: /post.php?p_id=$comment_post_id");
+    redirect("post.php?p_id=$comment_post_id");
   } else {
     echo "<script>alert('All fields are required')</script>";
   }

@@ -76,7 +76,7 @@ if (isset($_GET['delete'])) {
       mysqli_stmt_bind_param($stmt, "i", $user_id_to_delete);
       mysqli_stmt_execute($stmt);
       mysqli_stmt_close($stmt);
-      redirect("/users.php");
+      redirect("users.php");
 
     }
   }
