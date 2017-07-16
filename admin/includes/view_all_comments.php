@@ -80,7 +80,7 @@ if (isset($_GET['reject'])) {
 
   $reject_comment_query = mysqli_query($connection, $query);
 
-  header("Location: comments.php");
+  redirect("/comments.php");
 
 }
 
@@ -91,7 +91,7 @@ if (isset($_GET['delete'])) {
   $query = "DELETE FROM comments WHERE comment_id = {$comment_id_to_delete} ";
   $delete_comment_query = mysqli_query($connection, $query);
 
-  header("Location: comments.php");
+  redirect("/comments.php");
 
 }
 

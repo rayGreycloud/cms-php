@@ -61,7 +61,7 @@
 
     mysqli_stmt_close($stmt);
 
-    header("Location: index.php");
+    redirect("/index.php");
   }
 
 ?>

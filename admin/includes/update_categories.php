@@ -37,7 +37,7 @@
     mysqli_stmt_execute($stmt);
     confirmQuery($stmt);
 
-    header("Location: categories.php");
+    redirect("/categories.php");
   }
 ?>
 

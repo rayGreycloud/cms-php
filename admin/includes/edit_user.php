@@ -61,10 +61,10 @@
 
       confirmQuery($edit_user_query);
 
-      header("Location: users.php");
+      redirect("/users.php");
     }
   } else {
-    header("Location: index.php");
+    redirect("/index.php");
   }
 
 ?>

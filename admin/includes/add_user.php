@@ -31,7 +31,7 @@
     //
     // confirmQuery($create_user_query);
 
-    header("Location: users.php");
+    redirect("/users.php");
   }
 ?>
 

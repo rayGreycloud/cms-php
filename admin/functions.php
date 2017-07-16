@@ -10,6 +10,12 @@ function confirmQuery($result) {
   return $result;
 }
 
+function redirect($location) {
+  header("Location:" . $location);
+  exit;
+}
+
+
 function escape($string) {
   global $connection;
 

@@ -85,7 +85,7 @@ if (isset($_GET['reject'])) {
 
   $reject_comment_query = mysqli_query($connection, $query);
 
-  header("Location: comments.php");
+  redirect("/comments.php");
 
 }
 

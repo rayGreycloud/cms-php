@@ -172,7 +172,7 @@ if (isset($_GET['reset'])) {
   $reset_views_count_query = mysqli_query($connection, $query);
   confirmQuery($reset_views_count_query);
 
-  header("Location: posts.php");
+  redirect("/posts.php");
 
 }
 
@@ -188,7 +188,7 @@ if (isset($_GET['delete'])) {
   $delete_comments_query = mysqli_query($connection, $query);
   confirmQuery($delete_comments_query);
 
-  header("Location: posts.php");
+  redirect("/posts.php");
 
 }
 
