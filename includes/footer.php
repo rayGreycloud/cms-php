@@ -2,7 +2,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; rayGreycloud 2017</p>
+            <p>Developed by: rayGreycloud 2017</p>
         </div>
         <!-- /.col-lg-12 -->
     </div>
