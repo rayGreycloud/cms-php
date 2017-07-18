@@ -1,8 +1,37 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
-
 <!-- Navigation -->
 <?php  include "includes/navigation.php"; ?>
+
+
+<?php
+  $message = '';
+
+  if (!isset($_GET['forgot'])) {
+    redirect('index');
+  }
+
+  if (ifItIsMethod('post')) {
+    if (isset($_POST['email'])) {
+      $email = $_POST['email'];
+
+      $length = 50;
+
+      $token = bin2hex(openssl_random_pseudo_bytes($length));
+
+      if (already_exists('user_email', $email)) {
+        $query = "UPDATE users SET token=? WHERE user_email=? ";
+        $stmt = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $token, $email);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        $message = "Please check your email";
+      } else {
+        $message = "Error - username not found";
+      }
+    }
+  }
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -21,7 +50,7 @@
               <div class="panel-body">
 
                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
-
+                  <h3 class="text-center text-danger"><?php echo $message; ?></h3>
                   <div class="form-group">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
