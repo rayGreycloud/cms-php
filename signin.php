@@ -50,7 +50,8 @@
 
             </form>
             <div class="col-lg-12 text-center text-muted">
-              <a href="./registration.php"><h5>Need an account?  Register here</h5></a>
+              <a href="./forgot_password.php?forgot=<?php echo uniqid(true); ?>"><h5>Forgot your password?</h5></a>
+              <h5>Need an account? <a href="./registration.php">Register here</h5></a>
             </div>
 
 
