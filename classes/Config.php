@@ -9,6 +9,8 @@ class Config {
   const SMTP_USER = 'fbd95700b6294a';
 
   const SMTP_PASSWORD = 'f8c1619ff899d0';
+
+  const ADMIN_EMAIL = 'raygreycloud@gmail.com';
 }
 
 
