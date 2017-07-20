@@ -1,5 +1,12 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
+
+<?php
+require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+require './classes/Config.php';
+
+?>
+
 <!-- Navigation -->
 <?php  include "includes/navigation.php"; ?>
 
@@ -28,6 +35,37 @@
         $message = "Please check your email";
       } else {
         $message = "Error - username not found";
+      }
+
+      $mail = new PHPMailer();
+      // Set mailer to use SMTP
+      $mail->isSMTP();
+      // Specify main and backup SMTP servers
+      $mail->Host = Config::SMTP_HOST;
+      // Enable SMTP authentication
+      $mail->SMTPAuth = true;
+      // SMTP username
+      $mail->Username = Config::SMTP_USER;
+      // SMTP password
+      $mail->Password = Config::SMTP_PASSWORD;
+      // Enable TLS encryption, `ssl` also accepted
+      $mail->SMTPSecure = 'tls';
+      // TCP port to connect to
+      $mail->Port = Config::SMTP_PORT;
+      // Set email format to HTML
+      $mail->isHTML(true);
+
+      $mail->setFrom('admin@rayarama.com', 'Admin');
+      $mail->addAddress($email);
+
+      $mail->Subject = 'Reset Password';
+      $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+      $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if ($mail->send()) {
+        echo "Woohoo - Email sent!";
+      } else {
+        echo "Oops, something went wrong.";
       }
     }
   }
