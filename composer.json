@@ -1,0 +1,12 @@
+{
+    "name": "ray/cms",
+    "require": {
+        "phpmailer/phpmailer": "^5.2"
+    },
+    "authors": [
+        {
+            "name": "rayGreycloud",
+            "email": "rayGreycloud@gmail.com"
+        }
+    ]
+}
