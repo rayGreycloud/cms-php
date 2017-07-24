@@ -61,14 +61,18 @@
       $mail->addAddress($email);
 
       $mail->Subject = 'Reset Password';
-      $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-      $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+      $mail->Body =
+        '<p>
+          Please click to reset your password
+          <a href="http://localhost/cms/reset.php?email="'.$email. '&token='.$token.'>Reset Password</a>
+        </p>';
+      $mail->AltBody = 'Please click to reset your password';
 
-      // if ($mail->send()) {
-      //   echo "Woohoo - Email sent!";
-      // } else {
-      //   echo "Oops, something went wrong.";
-      // }
+      if ($mail->send()) {
+        echo "Woohoo - Email sent!";
+      } else {
+        echo "Oops, something went wrong.";
+      }
     }
   }
 ?>
