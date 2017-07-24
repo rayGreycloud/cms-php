@@ -69,7 +69,7 @@
       $mail->AltBody = 'Please click to reset your password';
 
       if ($mail->send()) {
-        echo "Woohoo - Email sent!";
+        $emailSent = true;
       } else {
         echo "Oops, something went wrong.";
       }
@@ -88,6 +88,7 @@
           <div class="panel-body">
             <div class="text-center">
 
+<?php if (!isset($emailSent)): ?>
               <h3><i class="fa fa-lock fa-4x"></i></h3>
               <h2 class="text-center">Forgot Password?</h2>
               <p>You can reset your password here.</p>
@@ -109,7 +110,9 @@
                 </form>
 
               </div><!-- Body-->
-
+<?php else: ?>
+              <h3 class="text-center text-danger"><?php echo $message; ?></h3>
+<?php endIf; ?>
             </div>
           </div>
         </div>
