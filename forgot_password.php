@@ -2,8 +2,9 @@
 <?php  include "includes/header.php"; ?>
 
 <?php
-require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
-require './classes/Config.php';
+  require './vendor/autoload.php';
+// require './vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+// require './classes/Config.php';
 
 ?>
 
@@ -55,7 +56,7 @@ require './classes/Config.php';
       // Set email format to HTML
       $mail->isHTML(true);
       $mail->CharSet = 'UTF-8';
-      
+
       $mail->setFrom('admin@rayarama.com', 'Admin');
       $mail->addAddress($email);
 
@@ -63,11 +64,11 @@ require './classes/Config.php';
       $mail->Body = 'This is the HTML message body <b>in bold!</b>';
       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-      if ($mail->send()) {
-        echo "Woohoo - Email sent!";
-      } else {
-        echo "Oops, something went wrong.";
-      }
+      // if ($mail->send()) {
+      //   echo "Woohoo - Email sent!";
+      // } else {
+      //   echo "Oops, something went wrong.";
+      // }
     }
   }
 ?>
