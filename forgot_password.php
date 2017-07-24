@@ -54,7 +54,8 @@ require './classes/Config.php';
       $mail->Port = Config::SMTP_PORT;
       // Set email format to HTML
       $mail->isHTML(true);
-
+      $mail->CharSet = 'UTF-8';
+      
       $mail->setFrom('admin@rayarama.com', 'Admin');
       $mail->addAddress($email);
 
