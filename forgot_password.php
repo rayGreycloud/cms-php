@@ -64,7 +64,7 @@
       $mail->Body =
         '<p>
           Please click to reset your password
-          <a href="http://localhost/cms/reset.php?email="'.$email. '&token='.$token.'>Reset Password</a>
+          <a href="http://localhost/cms/reset.php?email='.$email. '&token='.$token.'">Reset Password</a>
         </p>';
       $mail->AltBody = 'Please click to reset your password';
 
