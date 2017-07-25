@@ -24,20 +24,20 @@
                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
                   <div class="form-group">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                       <input id="password" name="password" placeholder="Enter new password" class="form-control"  type="password">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                      <span class="input-group-addon"><i class="fa fa-check"></i></span>
                       <input id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" class="form-control"  type="password">
                     </div>
                   </div>
                   <input type="hidden" class="hide" name="token" id="token" value="">
                 </form>
               </div><!-- Body-->
-              
+
             </div>
           </div>
         </div>
