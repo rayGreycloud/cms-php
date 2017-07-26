@@ -2,7 +2,26 @@
 <?php  include "includes/header.php"; ?>
 
 <?php
-  if (!isset($_GET['email']))
+  // if (!isset($_GET['email']) || !isset($_GET['token'])) {
+  //   redirect('index');
+  // }
+ ?>
+
+<?php
+// Set user token for testing
+$token = 'a900e0c43887ac9a1b586614bb35f314feace0ca79591fecb6755ca00827e9b524a6a79ba7904864bc040293ebec337c63c3';
+
+$query = 'SELECT username, user_email, token FROM USERS WHERE token=? ';
+if ($stmt = mysqli_prepare($connection, $query)) {
+  echo "Query working...";
+  mysqli_stmt_bind_param($stmt, "s", $token);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt, $username, $user_email, $token);
+  mysqli_stmt_fetch($stmt);
+  mysqli_stmt_close($stmt);
+
+  echo $username;
+}
  ?>
 <!-- Navigation -->
 <?php  include "includes/navigation.php"; ?>
