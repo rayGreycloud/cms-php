@@ -2,14 +2,16 @@
 <?php  include "includes/header.php"; ?>
 
 <?php
-  // if (!isset($_GET['email']) || !isset($_GET['token'])) {
-  //   redirect('index');
-  // }
+  if (!isset($_GET['email']) || !isset($_GET['token'])) {
+    redirect('index');
+  }
  ?>
 
 <?php
-// Set user token for testing
-$token = 'a900e0c43887ac9a1b586614bb35f314feace0ca79591fecb6755ca00827e9b524a6a79ba7904864bc040293ebec337c63c3';
+
+// Set user email and token for testing
+// $email = 'rayarama@gmail.com';
+// $token = 'a900e0c43887ac9a1b586614bb35f314feace0ca79591fecb6755ca00827e9b524a6a79ba7904864bc040293ebec337c63c3';
 
 $query = 'SELECT username, user_email, token FROM USERS WHERE token=? ';
 if ($stmt = mysqli_prepare($connection, $query)) {
@@ -25,8 +27,28 @@ if ($stmt = mysqli_prepare($connection, $query)) {
   // }
 
   if (isset($_POST['password']) && isset($_POST['confirmPassword'])) {
+    
+    if ($_POST['password'] === $_POST['confirmPassword']) {
+      $password = $_POST['password'];
 
-    echo "Both items are set.";
+      $hashedPassword = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
+
+      $query = "UPDATE users SET token='', user_password='{$hashedPassword}' WHERE user_email=? ";
+
+      if ($stmt = mysqli_prepare($connection, $query)) {
+
+        mysqli_stmt_bind_param($stmt, "s", $_GET['email']);
+        mysqli_stmt_execute($stmt);
+        confirmQuery($stmt);
+
+        if (mysqli_stmt_affected_rows($stmt) >= 1) {
+          redirect('/cms/signin.php');
+        }
+
+        mysqli_stmt_close($stmt);
+
+      }
+    }
   }
 }
  ?>
@@ -36,7 +58,6 @@ if ($stmt = mysqli_prepare($connection, $query)) {
 <!-- Page Content -->
 <div class="container">
 
-  <div class="form-gap"></div>
   <div class="container">
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3">
